@@ -1,0 +1,27 @@
+.main-nav{
+    display: flex;
+    flex-direction: row;
+    column-gap: 20px;
+    background-color:whitesmoke;
+    height:80px
+}
+.logo{
+    margin-top: -70px;
+    height:200px;
+    width:200px
+} 
+.btn :hover{
+    
+    color : blue;
+    scale: 1.20;
+}
+.btn{
+    font-size: 23px;
+    font-family: 'Tilt Neon', cursive;
+}
+
+
+
+*{
+    transition: 0.4s all;
+}
