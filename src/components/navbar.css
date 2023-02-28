@@ -122,5 +122,10 @@
   
   
 }
+@media only screen and (max-width: 300px) {
+    .logo{
+        display: none;
+    }
+}
 
 
