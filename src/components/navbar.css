@@ -1,0 +1,126 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.main-nav{
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    flex-direction: row;
+    column-gap: 20px;
+    background-color:white;
+    height:80px;
+    box-shadow:2px 2px 3px 0px black;
+}
+.nav-options{
+    display: flex;
+    flex-direction: row;
+    column-gap: 20px;
+
+}
+.logo{
+    margin-top: -70px;
+    height:200px;
+    width:200px
+} 
+.menu-icon{
+   height:40px;
+   margin-top: 20px;
+   margin-left: 3px;
+   display: none;
+   
+}
+.btn :hover{
+
+    color : blue;
+    scale: 1.20;
+    transition: 0.4s all;
+}
+.btn{
+    margin-top: 25px;
+    font-size: 23px;
+    font-family: 'Tilt Neon', cursive;
+}
+.right-op{
+    display: flex;
+    position: absolute;
+    right: 35px;
+    margin-top:17px;
+    column-gap: 10px;
+    font-family: 'Tilt Neon', cursive;
+    font-size: 23px;
+   
+}
+.user-name{
+    padding-top: 10px;
+    cursor:pointer;
+}
+.user-name:hover{
+    color: blue;
+}
+.user-img:hover{
+  filter: invert(50%);
+}
+.user-img{
+    cursor: pointer;
+}
+.user-op{
+     margin-top: 8px;
+    background-color: rgba(245, 245, 245, 0.825);
+    padding: 10px 30px;
+    border-radius: 10px;
+    position: absolute;
+    right : 30px;
+    display: none;
+    box-shadow: 2px 2px 3px 0px black;
+
+  
+}
+.user-op ul{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+
+    list-style: none;
+}
+.user-op li{
+    font-family: 'Tilt Neon', cursive;
+    font-size: 17px;
+}
+.left-options{
+    display: none;
+    margin-top: -1000px;
+}
+
+/* media queries Navbar */
+@media only screen and (max-width: 800px) {
+    .logo{
+        margin-left: -20px;
+    }
+    .left-options{
+        margin-top: 2px;
+        position: absolute;
+        left: 0;
+        height: 270px;
+        width: 180px;
+        text-align: center;
+        /* border:1px solid black; */
+        border-bottom-right-radius: 10px;
+         background-color:  rgba(245, 245, 245, 0.825);
+         box-shadow: 2px 2px 3px 0px black;
+       flex-direction: column;
+      
+    }
+   .nav-options{
+    display: none;
+   }
+    .menu-icon{
+        display: inline-block;
+    }
+  
+  
+  
+}
+
+
