@@ -2,13 +2,13 @@
 
 
 .top{
-    position: relative;
+    position: absolute;
     margin-left: 100px;
-    margin-top: 150px;
+    margin-top: 100px;
 }
 
 .top h1 {
-    font-size: 5rem;
+    font-size: 4rem;
     font-weight: 300;
     font-family: 'PT Mono';
 }
@@ -46,7 +46,6 @@ a:focus {
 	color: #555;
     visibility: hidden;
     border-right: 4px solid transparent;
-    max-width: 32rem; /* width of widest string */
 }
 
 /* steps is number of chars-1 */

@@ -14,8 +14,8 @@ const Effect = () => {
                                 <span>Haridwar</span>
                                 <span>Kasol</span>
                                 <span>Manali</span>
-                                <span>Rishikesh</span>
-                                <span>Amritsar</span>
+                                <span>J&K</span>
+                                <span>Shimla</span>
                             </span>
                     </h1>
                     <p> </p>
