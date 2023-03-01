@@ -79,7 +79,8 @@
     right : 30px;
     display: none;
     box-shadow: 2px 2px 3px 0px black;
-
+    animation-name: leftOptionsOpening;
+    animation-duration: 0.4s;
   
 }
 .user-op ul{
@@ -99,7 +100,7 @@
     position: absolute;
     cursor: pointer;
     animation-name: leftOptionsOpening;
-    animation-duration: 0.6s;
+    animation-duration: 0.4s;
 
 }
 
