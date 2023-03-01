@@ -29,6 +29,7 @@
    margin-top: 20px;
    margin-left: 3px;
    display: none;
+   cursor: pointer;
    
 }
 .btn :hover{
@@ -50,6 +51,7 @@
     column-gap: 10px;
     font-family: 'Tilt Neon', cursive;
     font-size: 23px;
+    cursor: pointer;
    
 }
 .user-name{
@@ -91,7 +93,45 @@
 .left-options{
     display: none;
     margin-top: -1000px;
+    position: absolute;
+    cursor: pointer;
+    animation-name: leftOptionsOpening;
+    animation-duration: 0.6s;
+
 }
+
+/* animations */
+@keyframes leftOptionsOpening{
+    0%{
+        margin-left: -150px;
+        transform: scale(1.5);
+    }
+    to{
+        margin-left: 0px;
+        transform: scale(1);
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* media queries Navbar */
 @media only screen and (max-width: 800px) {

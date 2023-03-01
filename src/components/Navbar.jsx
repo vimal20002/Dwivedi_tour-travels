@@ -10,20 +10,26 @@ function Navbar() {
   const user = {
     name:"Raghav"
   }
-  window.onload = function(){
-    var divToHide = document.getElementById('user-op');
+    var userOp = document.getElementById('user-op');
+    var leftOp = document.getElementById('left-options');
     document.onclick = function(e){
       if(Array.from(e.target.classList).find((element)=>{
         return element==='options'
       }) !== 'options' ){
         //element clicked wasn't the div; hide the div
         setToolBar(0);
-        divToHide.style.display = 'none';
+        userOp.style.display = 'none';
       }
-    
-    };
-  };
+      if(e.target.id !== "menu-icon"){
+        //element clicked wasn't the div; hide the div
+        setMenuBar(0);
+        leftOp.style.display = 'none';
+      }
 
+    };
+
+ 
+  
 
   const showOption = (e)=>{
     if(toolBar % 2===0)
@@ -61,7 +67,7 @@ function Navbar() {
   return (
     <>
     <div className="main-nav">
-      <img src={menu} alt="menu" className='menu-icon' onClick={()=>{showMenuOption()}} />
+      <img src={menu} alt="menu" className='menu-icon' id='menu-icon' onClick={()=>{showMenuOption()}} />
       <a href="/">
       <img src={logo} alt="dwivedi" className="logo"/>
       </a>
