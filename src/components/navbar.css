@@ -32,6 +32,9 @@
    cursor: pointer;
    
 }
+.menu-icon:hover{
+    filter: invert(50%);
+}
 .btn :hover{
 
     color : blue;
