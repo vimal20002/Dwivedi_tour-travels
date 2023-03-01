@@ -2,9 +2,9 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div>
+    <div className='footer'>
         <p>
-            All Copyrights Reserved © 2023
+            All Copyrights Reserved 2023 © Dwivedi Tour&Tarvels Pvt. Ltd.
         </p>
     </div>
   )
