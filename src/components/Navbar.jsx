@@ -20,7 +20,9 @@ function Navbar() {
         setToolBar(0);
         userOp.style.display = 'none';
       }
-      if(e.target.id !== "menu-icon"){
+      if(Array.from(e.target.classList).find((element)=>{
+        return element==='l-options'
+      }) !== 'l-options' ){
         //element clicked wasn't the div; hide the div
         setMenuBar(0);
         leftOp.style.display = 'none';
@@ -67,7 +69,7 @@ function Navbar() {
   return (
     <>
     <div className="main-nav">
-      <img src={menu} alt="menu" className='menu-icon' id='menu-icon' onClick={()=>{showMenuOption()}} />
+      <img src={menu} alt="menu" className='menu-icon l-options'  onClick={()=>{showMenuOption()}} />
       <a href="/">
       <img src={logo} alt="dwivedi" className="logo"/>
       </a>
@@ -89,17 +91,17 @@ function Navbar() {
        </div>
     </div>
     </div>
-    <div className="left-options" id='left-options'>
-      <div className="btn nav-home"><h5>Home</h5></div>
-      <div className="btn nav-bookings"><h5>Book Cabs</h5></div>
-       <div className="btn nav-cargo"><h5>Cargo</h5></div>
-       <div className="btn nav-about"><h5>About</h5></div>
-       <div className="btn nav-contact"><h5>Contact Us</h5></div>
+    <div className="left-options l-options" id='left-options'>
+      <div className="btn nav-home l-options"><h5 className='l-options'>Home</h5></div>
+      <div className="btn nav-bookings l-options"><h5 className='l-options'>Book Cabs</h5></div>
+       <div className="btn nav-cargo l-options"><h5 className='l-options'>Cargo</h5></div>
+       <div className="btn nav-about l-options"><h5 className='l-options'>About</h5></div>
+       <div className="btn nav-contact l-options"><h5 className='l-options'>Contact Us</h5></div>
       </div>
-    <div className="user-op" id='user-op'>
-      <ul>
-        <li>Acoount</li>
-        <li>Log Out</li>
+    <div className="user-op options" id='user-op'>
+      <ul className='options'>
+        <li className='options'>Acoount</li>
+        <li className='options'>Log Out</li>
       </ul>
     </div>
     </>
