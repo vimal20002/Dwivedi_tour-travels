@@ -2,9 +2,12 @@
 
 
 .top{
-    position: absolute;
+    position: relative;
     margin-left: 100px;
     margin-top: 100px;
+    overflow: hidden;
+    display: inline-block;
+    width: 500px ;
 }
 
 .top h1 {

@@ -1,0 +1,14 @@
+.main-img img{
+    height:400px;
+    width: 500px;
+    border-radius: 20px;
+    box-shadow:7px 7px 8px 0px black;
+}
+
+.main-img{
+    position: absolute;
+    margin-top: 45px;
+    right:105px;
+  
+    display: inline-block; 
+}

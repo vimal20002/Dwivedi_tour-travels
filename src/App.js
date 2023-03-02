@@ -9,7 +9,8 @@ function App() {
     <>
      <Navbar/>
      <Home/>
-     <Footer/>
+     
+     {/* <Footer/> */}
     </>
   );
 }

@@ -108,8 +108,8 @@
     background-color: black;
     color: white;
     font-family: 'Tilt Neon', cursive;
-    position: absolute;
-    bottom: 0px;
+    position: relative;
+    margin-top: 100px;
     width: 100vw;
     padding: 10px;
     text-align: center;
