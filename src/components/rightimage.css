@@ -9,6 +9,19 @@
     position: absolute;
     margin-top: 45px;
     right:105px;
-  
+     /* border: 2px solid red; */
     display: inline-block; 
+}
+@media (max-width:1210px){
+       .main-img{ 
+        position: relative;
+        right:0;
+        left: 17px;
+       }
+       .main-img img{
+        width: 350px;
+     
+       
+
+       }
 }
