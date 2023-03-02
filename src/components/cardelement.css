@@ -1,0 +1,28 @@
+.card-body img{
+    width: 300px;
+    height: 300px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.card-body{
+    /* border: 2px solid red; */
+    border-radius: 10px;
+    /* position: absolute;
+    top:600px;
+    left: 8px; */
+    box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.702) ;
+    display: inline-flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+.card-title{
+    font-family: 'Tilt Neon', cursive;
+    font-size: 25px;
+   color:rgba(0, 0, 0, 0.784);
+    text-align: center;
+}
+.card-body:hover{
+    transform: scale(1.06);
+    transition-duration: 0.8s;
+    box-shadow: 6px 6px 8px rgba(0, 0, 0, 0.702) ;
+}

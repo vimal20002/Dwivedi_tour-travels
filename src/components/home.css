@@ -1,0 +1,13 @@
+.catalogue{
+
+    display: inline-flex;
+    row-gap: 50px;
+    column-gap:100px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 200px;
+}
+/* *{
+    border: 2px solid black;
+} */
