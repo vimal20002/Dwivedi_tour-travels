@@ -7,9 +7,7 @@
 .card-body{
     /* border: 2px solid red; */
     border-radius: 10px;
-    /* position: absolute;
-    top:600px;
-    left: 8px; */
+    position: relative;
     box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.702) ;
     display: inline-flex;
     flex-direction: column;
@@ -17,12 +15,30 @@
 }
 .card-title{
     font-family: 'Tilt Neon', cursive;
-    font-size: 25px;
+    font-size: 23px;
+    padding: 5px;
    color:rgba(0, 0, 0, 0.784);
-    text-align: center;
+   margin-left: 10px;
 }
 .card-body:hover{
     transform: scale(1.06);
     transition-duration: 0.8s;
     box-shadow: 6px 6px 8px rgba(0, 0, 0, 0.702) ;
+}
+.book-now{
+    font-family: 'Tilt Neon', cursive;
+    position: absolute;
+    top: 320px;
+    left: 180px;
+    font-size: 22px;
+    background-color: red;
+    border-radius: 8px;
+    padding: 5px;
+    color: white;
+    box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.702);
+    cursor: pointer;
+}
+.book-now:hover{
+    background-color: white;
+    color: red;
 }

@@ -55,6 +55,7 @@
     font-family: 'Tilt Neon', cursive;
     font-size: 23px;
     cursor: pointer;
+    
    
 }
 .user-name{
@@ -82,7 +83,7 @@
     box-shadow: 2px 2px 3px 0px black;
     animation-name: leftOptionsOpening;
     animation-duration: 0.4s;
-  
+    z-index: 100;
 }
 .user-op ul{
     display: flex;
@@ -102,6 +103,7 @@
     cursor: pointer;
     animation-name: leftOptionsOpening;
     animation-duration: 0.4s;
+    z-index: 100;
 
 }
 .footer{
@@ -109,8 +111,8 @@
     color: white;
     font-family: 'Tilt Neon', cursive;
     position: relative;
-    margin-top: 100px;
-    width: 100vw;
+    margin-top: 50px;
+    width: 100%;
     padding: 10px;
     text-align: center;
     border-top-right-radius: 20px;

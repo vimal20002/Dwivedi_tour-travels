@@ -14,14 +14,6 @@
 }
 @media (max-width:1210px){
        .main-img{ 
-        position: relative;
-        right:0;
-        left: 17px;
-       }
-       .main-img img{
-        width: 350px;   
-     
-       
-
+        display: none;
        }
 }

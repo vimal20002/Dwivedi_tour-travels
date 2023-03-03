@@ -1,0 +1,27 @@
+.catalogue{
+
+    display: inline-flex;
+    row-gap: 50px;
+    column-gap:100px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+.heading{
+text-align: center;
+margin-top: 200px;
+font-family: 'Tilt Neon', sans-serif;
+color: rgba(0, 0, 0, 0.646);
+}
+/* *{
+    border: 2px solid black;
+} */
+.line{
+    border: 1px rgba(0, 0, 0, 0.685) solid;
+margin-top: 50px;
+height: 0px;
+}
+.sec{
+    margin-top: 100px;
+}

@@ -2,7 +2,8 @@ import React from 'react'
 import CardElement from './CardElement'
 import Effect from './Effect'
 import RightImage from './RightImage'
-import './home.css'
+import Catalogue from './Catalogue'
+import Facilities from './Facilities'
 
 const Home = () => {
    const dummyData=[
@@ -37,12 +38,8 @@ const Home = () => {
     <>
         <Effect/>
         <RightImage/>
-       
-         <div className="catalogue">
-          {dummyData.map((e)=>{
-               return <CardElement title={e.title} imgUrl={e.imgUrl} price={e.price}/>
-          })}
-         </div>
+       <Catalogue/>
+       <Facilities/>
     </>
   )
 }
