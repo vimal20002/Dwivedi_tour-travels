@@ -8,9 +8,16 @@
     align-items: center;
     margin-top: 50px;
 }
+.main-heading{
+    text-align:  center;
+    font-size: 32px;
+    font-family: 'Tilt Neon', sans-serif;
+    color: rgba(0, 0, 0, 0.746);
+    margin-top: 180px;
+}
 .heading{
 text-align: center;
-margin-top: 200px;
+margin-top: 50px;
 font-family: 'Tilt Neon', sans-serif;
 color: rgba(0, 0, 0, 0.646);
 }

@@ -6,9 +6,10 @@
 }
 .card-body{
     /* border: 2px solid red; */
+    background-color: whitesmoke;
     border-radius: 10px;
     position: relative;
-    box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.702) ;
+    box-shadow: 8px 8px 10px 0px rgba(225, 207, 207, 0.918);
     display: inline-flex;
     flex-direction: column;
     row-gap: 10px;
@@ -23,7 +24,7 @@
 .card-body:hover{
     transform: scale(1.06);
     transition-duration: 0.8s;
-    box-shadow: 6px 6px 8px rgba(0, 0, 0, 0.702) ;
+    box-shadow: 8px 8px 10px 0px rgba(120, 92, 205, 0.767);
 }
 .book-now{
     font-family: 'Tilt Neon', cursive;
