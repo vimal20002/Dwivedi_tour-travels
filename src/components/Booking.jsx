@@ -18,7 +18,9 @@ carUrl:"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoHCBUVFBcUFRUXF
         ]
   return (
     <>  
-    <h1 className='choose-car'>Choose One Of The Cars</h1>
+    <br />
+    <h2 className='choose-car'>Choose One Of The Vehicles</h2>
+    <br />
     <div className="main-car">    
     {     
         carData.map((e)=>{
@@ -29,7 +31,6 @@ carUrl:"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoHCBUVFBcUFRUXF
     
      <br/>
      <br/>
-     <h2 className='h2-heading'>Fill Form</h2>
      <div className="car-form">
      <input type="text" name='from' placeholder='Choose Pickup Location' />
      <h3 className='h4-heading'>To</h3>
@@ -38,7 +39,7 @@ carUrl:"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoHCBUVFBcUFRUXF
      <input type="date" name="date"  />
      <input type="time" name="time" />
      <textarea name="suggestions" placeholder='Any Suggestions For Driver' cols="25" rows="3"/>
-     <div className="book-btn">Confirm Booking</div>
+     <div className="book-btn">Book Now</div>
     </div>
     </>
   )

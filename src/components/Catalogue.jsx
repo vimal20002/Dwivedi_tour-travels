@@ -32,6 +32,9 @@ const Catalogue = () => {
      ]
   return (<>
          <h1 className='main-heading'>Featured Tours</h1>
+         <br />
+         <br />
+         <hr />
         <h1 className="heading">Mountains</h1>
     <div className="catalogue">
     {dummyData.map((e)=>{

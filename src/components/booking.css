@@ -53,14 +53,15 @@
 .car-form{
     background-color: whitesmoke;
     box-shadow: 5px 5px 7px 0px rgba(225, 207, 207, 0.918);
-    display: inline-flex;
+    display: flex;
     border-radius: 20px;
     padding: 40px 50px;
-    margin-left: 430px;
+    margin: 0px 30px;
     flex-direction: column;
     row-gap: 10px;
     align-items: center;
     justify-content: center;
+    margin-bottom: 20px;
 }
 
 input{
@@ -103,11 +104,11 @@ textarea::placeholder{
     font-size: large;
     border-radius: 10px;
     margin-top:10px;
+    border: 2px black solid;
 }
 .book-btn:hover{
     background-color:whitesmoke;
     color:black;
-    border: 2px black solid;
     box-shadow:4px 4px 6px 0px rgba(120, 92, 205, 0.767);
 }
 @media screen and (max-width:1096px) {
