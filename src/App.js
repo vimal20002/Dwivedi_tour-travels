@@ -4,15 +4,17 @@ import Booking from './components/Booking';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Home from './components/Home';
-import Options from './components/Options';
+import LogIn from './components/LogIn';
 import Navbar from './components/Navbar';
+import Register from './components/Register';
 
 
 function App() {
   return (
     <>
      <Navbar/>
-     <Options/>
+     <Register/>
+     {/* <LogIn/> */}
      {/* <Home/>   */}
       {/* <Booking/>  */}
       {/* <About/> */}

@@ -1,0 +1,64 @@
+.loginForm{
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    
+    justify-content: center;
+    align-items: center;
+    margin: 98px 30px;
+    padding: 20px;
+    background-color: whitesmoke;
+    border-radius: 20px;
+    box-shadow: 5px 5px 7px 0px rgba(225, 207, 207, 0.918); 
+}
+.loginForm img{
+    height: 150px;
+    width:150px;
+}
+
+.registeropt{
+    font-size: 20px;
+    font-weight: 600;
+}
+.registeropt:hover{
+    color: rgba(107, 105, 105, 0.801);
+    cursor: pointer;
+}
+
+
+.registerForm{
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+ 
+    justify-content: center;
+    align-items: center;
+    margin: 98px 30px;
+    padding: 20px;
+    background-color: whitesmoke;
+    border-radius: 20px;
+    box-shadow: 5px 5px 7px 0px rgba(225, 207, 207, 0.918); 
+}
+.registerForm img{
+    height: 100px;
+    width:100px;
+    margin-left: 20px;
+}
+@media screen and (max-width:450px) {
+    .loginForm{
+        padding: 10px;
+    }
+    .registerForm{
+        padding: 10px;
+    }
+  
+}
+@media screen and (max-width:380px){
+    .registerForm{
+        margin: 50px 30px;
+    }
+}
+
+
+
+
