@@ -1,0 +1,77 @@
+.main-account{
+    display: flex;
+    flex-direction: column;
+    margin: 40px 30px;
+    row-gap: 50px;
+   justify-content: center;
+   align-items: center;
+}
+.user-info{
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 250px;
+    padding: 20px;
+    row-gap: 50px;
+    justify-content: center;
+    align-items: center;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    box-shadow: 5px 5px 7px 0px rgba(225, 207, 207, 0.918); 
+}
+
+
+.upload-img{
+    padding: 4px;
+    text-align: center;
+  
+}
+.user-info img{
+    margin-left: 25px;
+    border-radius: 50%;
+    width:150px;
+   height:150px;
+}
+.user-info input{
+    width: 250px;
+}
+.account-info{
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+.submit-btn{
+  padding: 10px;
+  text-align: center;
+}
+.forgot-password:hover{
+    color: rgba(107, 105, 105, 0.801);
+    cursor: pointer;
+}
+
+
+
+.recent-bookings{
+   display: flex;
+   flex-direction: column;
+   margin: 30px 60px;
+   width: 100%;
+   row-gap: 18px;
+   justify-content: center;
+   align-items: center;
+   
+}
+.booked-card{
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 15px;
+    column-gap: 400px;
+    width: 100%;
+    background-color: rgba(156, 255, 222, 0.793);
+     border-radius: 10px;
+    box-shadow: 5px 5px 7px 0px rgba(225, 207, 207, 0.918); 
+    padding: 20px 30px;
+    align-items: center;
+    justify-content: center;
+     text-align: center;
+}
+
