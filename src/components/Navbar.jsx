@@ -93,7 +93,7 @@ function Navbar() {
        </div>
        {isLoggedIn ?<div className="user-name" >
         <h5 onClick={()=>{showOption()}} className="options">{user.name}</h5>
-       </div>:<h5 className='loginOp'><Link to ="/login"> Login </Link></h5>}
+       </div>:<h5 className='loginOp'><Link to ="/login"> Log In </Link></h5>}
     </div>
     </div>
     <div className="left-options l-options" id='left-options'>

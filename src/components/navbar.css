@@ -43,8 +43,9 @@
 }
 .btn{
     margin-top: 25px;
-    font-size: 25px;
-    font-family: 'Tilt Neon', cursive;
+    font-size: 23px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: 1px;
 }
 .right-op{
     display: flex;
