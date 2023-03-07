@@ -11,7 +11,7 @@ import  {Link} from 'react-router-dom'
 function Navbar() {
   const [toolBar, setToolBar]  = useState(0);
   const [menuBar,setMenuBar]=useState(0);
- 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const user = {
     name:"Raghav"
   }
@@ -75,15 +75,15 @@ function Navbar() {
     <>
     <div className="main-nav">
       <img src={menu} alt="menu" className='menu-icon l-options'  onClick={()=>{showMenuOption()}} />
-      <a href="/">
+      <Link to="/">
       <img src={logo} alt="dwivedi" className="logo"/>
-      </a>
+      </Link>
       <div className="nav-options" id='nav-options'>
-      <div className="btn nav-home"><h5>Home</h5></div>
-      <div className="btn nav-bookings"><h5>Book Cabs</h5></div>
-       <div className="btn nav-cargo"><h5>Cargo</h5></div>
-       <div className="btn nav-about"><h5>About</h5></div>
-       <div className="btn nav-contact"><h5>Contact Us</h5></div>
+      <div className="btn nav-home"><Link to="/"><h5>Home</h5></Link></div>
+      <div className="btn nav-bookings"><Link to="/bookcabs"><h5>Book Cabs</h5></Link></div>
+       <div className="btn nav-cargo"><Link to="/cargo"><h5>Cargo</h5></Link></div>
+       <div className="btn nav-about"><Link to="/about"><h5>About</h5></Link></div>
+       <div className="btn nav-contact"><Link to="/contact"><h5>Contact Us</h5></Link></div>
       </div>
      
     
@@ -91,9 +91,9 @@ function Navbar() {
     <div className="user">
         <img src={userimg} alt="user" className="user-img options"  onClick={()=>{showOption()}} />
        </div>
-       <div className="user-name" >
+       {isLoggedIn ?<div className="user-name" >
         <h5 onClick={()=>{showOption()}} className="options">{user.name}</h5>
-       </div>
+       </div>:<h5 className='loginOp'><Link to ="/login"> Login </Link></h5>}
     </div>
     </div>
     <div className="left-options l-options" id='left-options'>
@@ -105,7 +105,9 @@ function Navbar() {
       </div>
     <div className="user-op options" id='user-op'>
       <ul className='options'>
-        <li className='options'>Acoount</li>
+        <Link to="/account">
+        <li className='options'>Account</li>
+        </Link>
         <li className='options'>Log Out</li>
       </ul>
     </div>

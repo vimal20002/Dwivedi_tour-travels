@@ -16,20 +16,19 @@ function App() {
     <>
 
        <Switch>
-        <React.Fragment>
+      <React.Fragment>
     <Navbar/>
-    <Route path='/' element={<Home/>}></Route>
-    <Route path='/bookcabs' element={<Booking/>}></Route>
-    <Route path='/cargo' element={<Booking/>}></Route>
-    <Route path='/about' element={<About/>}></Route>
-    <Route path='/contact' element={<Contact/>}></Route>
-    <Route path='/login' element={<LogIn/>}></Route>
-    <Route path='/register' element={<Register/>}></Route>
-    <Route path='/account' element={<Account/>}></Route>
+    <Route exact path='/' ><Home/></Route>
+    <Route exact path='/bookcabs' ><Booking/></Route>
+    <Route exact path='/cargo' ><Booking/></Route>
+    <Route exact path='/about' ><About/></Route>
+    <Route exact path='/contact' ><Contact/></Route>
+    <Route exact path='/login' ><LogIn/></Route>
+    <Route exact path='/register' ><Register/></Route>
+    <Route exact path='/account' ><Account/></Route>
+     <Footer/>  
     </React.Fragment>
     </Switch>
-
-     <Footer/>  
     
      
     </>

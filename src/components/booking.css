@@ -76,10 +76,10 @@ input{
     font-size: 23px;
     font-family: 'Times New Roman', Times, serif;
     font-weight: 500;
-    color:rgb(12, 3, 92);
+    color:rgb(255, 25, 125);
 }
 input::placeholder{
-    color:rgb(12, 3, 92);
+    color:rgb(255, 25, 125);
 }
 textarea{
     background-color: whitesmoke;
@@ -92,10 +92,10 @@ textarea{
     font-size: 23px;
     font-family: 'Times New Roman', Times, serif;
     font-weight: 500;
-    color:rgb(12, 3, 92);
+    color:rgb(255, 25, 125);
 }
 textarea::placeholder{
-    color:rgb(12, 3, 92);
+    color:rgb(255, 25, 125);
 }
 .book-btn{
     background-color:rgb(12, 3, 92) ;
@@ -105,6 +105,7 @@ textarea::placeholder{
     border-radius: 10px;
     margin-top:10px;
     border: 2px black solid;
+    cursor: pointer;
 }
 .book-btn:hover{
     background-color:whitesmoke;

@@ -72,6 +72,14 @@
 .user-img{
     cursor: pointer;
 }
+.loginOp{
+    margin-top: 10px;
+}
+.loginOp :hover{
+  
+    color : blue;
+    transition: 0.4s all; 
+}
 .user-op{
      margin-top: 8px;
     background-color: rgba(245, 245, 245, 0.825);
@@ -105,6 +113,7 @@
     animation-duration: 0.4s;
     z-index: 100;
 
+
 }
 .footer{
     background-color: black;
@@ -126,31 +135,11 @@
         transform: scale(1.5);
     }
     to{
-        margin-left: 0px;
+        margin-left: 10px;
         transform: scale(1);
 
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* media queries Navbar */
 @media only screen and (max-width: 800px) {
@@ -158,16 +147,17 @@
         margin-left: -20px;
     }
     .left-options{
-        margin-top: 2px;
+        margin-top: 15px;
+        margin-left: 10px;
         position: absolute;
         left: 0;
         height: 270px;
         width: 180px;
         text-align: center;
         /* border:1px solid black; */
-        border-bottom-right-radius: 10px;
-         background-color:  rgba(245, 245, 245, 0.825);
-         box-shadow: 2px 2px 3px 0px black;
+        border-radius: 10px;
+        background-color: rgb(245, 245, 245);
+        box-shadow: 6px 6px 8px 0px rgba(225, 207, 207, 0.918);
        flex-direction: column;
       
     }

@@ -1,6 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './contact.css'
 const Contact = () => {
+  const [email, setEmail] = useState("");
+  const [querry, setQuerry] = useState("");
+  const submitForm = ()=>{
+    const formData={
+      email:email,
+      querry:querry,
+    }
+    console.log(formData)
+  }
   return (
     <>
     <div className="main-contact">
@@ -16,9 +25,9 @@ Noida - 201301, UP, India</p>
     </div>
     <div className="getInTouch">
         <h2>Get In Touch</h2>
-        <input type="email" name="email" id="email" placeholder='info@example.com' autoFocus/>
-        <textarea name="querry" id="qurry" cols="30" rows="4" placeholder='Write Your Query Here' autoFocus></textarea>
-        <div className="book-btn">Submit</div>
+        <input type="email" name="email" id="email" placeholder='info@example.com' autoFocus value={email} onChange={(e)=>{setEmail(e.target.value)}}/>
+        <textarea name="querry" id="qurry" cols="30" rows="4" placeholder='Write Your Query Here' autoFocus value={querry} onChange ={(e)=>{setQuerry(e.target.value)}}></textarea>
+        <div className="book-btn"  onClick={()=>{submitForm()}}>Submit</div>
     </div>
     </>
   )
