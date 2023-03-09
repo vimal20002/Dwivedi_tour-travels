@@ -23,3 +23,51 @@ export const register = async (req, res) => {
     }
 
 }
+export const logIn=async(req,res)=>{
+  
+    try {
+         const user=await UserModal.findOne({email:req.body.email});
+         if(user!==null){
+           const passwordCompare= await bcrypt.compare(req.body.password,user.password)
+           if(passwordCompare){
+            res.json(user);
+           }
+           else{
+            res.send("Invalid Credentials");
+           }
+         }
+         else{
+            res.send("User is not registered");
+
+         }
+    } catch (error) {
+        res.send(error)
+    }
+}
+
+export const booking=async(req,res)=>{
+       try {
+         const user=await UserModal.findOne({email:req.body.email});
+         const booking={
+            pickLoc:req.body.pickLoc,
+            dest:req.body.dest,
+            date:req.body.date,
+            time:req.body.time,
+            feed:req.body.feed
+         }
+         console.log(user);
+         await user.bookings.push(booking);
+         await user.save();
+         const admininfo= new adminModal.find({});
+         await admininfo.bookings.push(req.body);
+         await admininfo.save();
+
+        res.json(user);
+
+
+
+
+       } catch (error) {
+        res.send(error);
+       }
+}
