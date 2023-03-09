@@ -3,9 +3,17 @@
   "version": "1.0.0",
   "description": "a tour and travels webite",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Vimal mishra Raghav Pandey",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mongoose": "^7.0.1",
+    "nodemon": "^2.0.21"
+  }
 }
