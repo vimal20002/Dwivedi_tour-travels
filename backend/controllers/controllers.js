@@ -1,6 +1,7 @@
 import { UserModal } from "../modals/userSchema.js"
 import { adminModal } from "../modals/adminModal.js"
 import bcrypt from "bcryptjs"
+import { querryModal } from "../modals/querrySchema.js"
 export const register = async (req, res) => {
     try {
         let user = await UserModal.findOne({ email: req.body.email })
@@ -48,26 +49,30 @@ export const logIn=async(req,res)=>{
 export const booking=async(req,res)=>{
        try {
          const user=await UserModal.findOne({email:req.body.email});
-         const booking={
+         const nbooking={
+            vehicle:req.body.vehicle,
+            phone:req.body.phone,
             pickLoc:req.body.pickLoc,
             dest:req.body.dest,
             date:req.body.date,
             time:req.body.time,
             feed:req.body.feed
          }
-         console.log(user);
-         await user.bookings.push(booking);
+         const arr = user.booking;
+         arr.push(nbooking)
+         user.booking = arr;
          await user.save();
-         const admininfo= new adminModal.find({});
-         await admininfo.bookings.push(req.body);
+         const admininfo= new adminModal({booking:req.body});
          await admininfo.save();
-
-        res.json(user);
-
-
-
-
+         console.log(admininfo)
+         res.json({message:"Cab booked successfully!"});
        } catch (error) {
         res.send(error);
        }
+}
+export const querry = async(req, res)=>{
+const nquerry = new querryModal({querry:req.body});
+await nquerry.save();
+console.log(nquerry);
+res.json({message:"Querry submited successfully!"});
 }
