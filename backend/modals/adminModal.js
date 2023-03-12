@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
 const adminSchema = new mongoose.Schema({
-booking:Object
+bookings:Object
 })
 export const adminModal = mongoose.model("adminDetails",adminSchema);

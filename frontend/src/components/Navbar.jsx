@@ -11,7 +11,7 @@ import  {Link} from 'react-router-dom'
 function Navbar() {
   const [toolBar, setToolBar]  = useState(0);
   const [menuBar,setMenuBar]=useState(0);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const user = {
     name:"Raghav"
   }
