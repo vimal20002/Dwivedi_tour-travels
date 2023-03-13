@@ -3,6 +3,7 @@ import { adminModal } from "../modals/adminModal.js"
 import bcrypt from "bcryptjs"
 import { querryModal } from "../modals/querrySchema.js"
 import nodemailer from "nodemailer"
+import { tourModal } from "../modals/tourModal.js"
 
 export const register = async (req, res) => {
     try {
@@ -145,6 +146,7 @@ export const upldateInfo=async(req,res)=>{
     }
  }
  export const genOtp=async(req,res)=>{
+   try {
     var digits = '0123456789';
     let OTP = '';
     for (let i = 0; i < 4; i++ ) {
@@ -169,8 +171,8 @@ export const upldateInfo=async(req,res)=>{
     
     var mailOptions = {
       from: 'dwiveditourtravels@outlook.com',
-      to: 'raghavkanpur11@gmail.com',
-      subject: 'Sending Email using Node.js',
+      to: req.body.email,
+      subject: 'Verification for OTP of Dwivedi Tour&Travels',
       text: 'Your Otp for verification is '+OTP
     };
     transporter.sendMail(mailOptions, function(error, info){
@@ -182,22 +184,61 @@ export const upldateInfo=async(req,res)=>{
       res.json({message:"Otp sent successfully"})
     });
    }
+   } catch (error) {
+    res.send(error);
+   }
+   
  }
  export const confirmOtp = async(req, res)=>{
-  const user = await UserModal.findOne({email:req.body.email});
-  if(user === null)
-  {
-    res.json({message:"User is not registered yet"});
-  }
-  else{
-    if(req.body.otp===user.otp)
+  try {
+    const user = await UserModal.findOne({email:req.body.email});
+    if(user === null)
     {
-      res.json({message:"Otp matched successfully", status:"matched"});
+      res.json({message:"User is not registered yet"});
     }
     else{
-      res.json({message:"Otp dosen't matched", status:"Unmatched"});
+      if(req.body.otp===user.otp)
+      {
+        res.json({message:"Otp matched successfully", status:"matched"});
+      }
+      else{
+        res.json({message:"Otp dosen't matched", status:"Unmatched"});
+      }
     }
+  } catch (error) {
+    res.send(error);
   }
+
+ }
+ export const updatePassword=async(req,res)=>{
+  try {
+    const user=await UserModal.findOne({email:req.body.email});
+    const salt = await bcrypt.genSalt(10)
+    const npass = await bcrypt.hash(req.body.password, salt);
+    user.password=npass;
+    await user.save();
+    res.json({message:"Password updated successfully"})
+  } catch (error) {
+    res.send(error);
+  } 
+ }
+ export const addTour=async(req,res)=>{
+    try {
+       const tour=await tourModal.findOne({title:req.body.title});
+       if(tour===null){
+          const ntour=new tourModal({...req.body});
+          await ntour.save();
+          res.json({message:"Tour added successfully"});
+       }
+       else{
+        res.json({message:"Tour already exists"})
+       }
+
+
+
+    } catch (error) {
+      res.send(error);
+    }
  }
  
 

@@ -1,5 +1,5 @@
 import express from "express"
-import { logIn, register, querry, googleLogin, bookCab, bookCargo, uploadImage, upldateInfo, genOtp, confirmOtp } from "../controllers/controllers.js";
+import { logIn, register, querry, googleLogin, bookCab, bookCargo, uploadImage, upldateInfo, genOtp, confirmOtp, updatePassword, addTour } from "../controllers/controllers.js";
 const userRoute = express.Router();
 userRoute.post('/register',register);
 userRoute.post('/login',logIn);
@@ -11,4 +11,6 @@ userRoute.post('/uploadimage',uploadImage);
 userRoute.post('/updateinfo',upldateInfo);
 userRoute.post('/genotp',genOtp);
 userRoute.post('/confirmotp',confirmOtp);
+userRoute.post('/updatepassword',updatePassword);
+userRoute.post('/addtour',addTour);
 export default userRoute
