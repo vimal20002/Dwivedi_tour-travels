@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 const tourSchema=new mongoose.Schema({
-  tour:Object,
+  title:String,
+  Price:String,
+  imgUrl:String
 })
-export const tourModal=mongoose.model("tour",tourSchema);
+export const tourModal=mongoose.model("tours",tourSchema);

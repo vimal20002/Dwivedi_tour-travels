@@ -7,6 +7,7 @@ googleId:String,
 imageUrl:String,
 bookings:[Object],
 token:String,
-otp:String
+otp:String,
+type:String,
 })
 export const UserModal = mongoose.model("userData",userSchema);

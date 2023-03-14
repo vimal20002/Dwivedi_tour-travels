@@ -224,8 +224,9 @@ export const upldateInfo=async(req,res)=>{
  }
  export const addTour=async(req,res)=>{
     try {
-       const tour=await tourModal.findOne({title:req.body.title});
-       if(tour===null){
+      const tour=await tourModal.findOne({title:req.body.title});
+      if(tour===null){
+         console.log(req.body)
           const ntour=new tourModal({...req.body});
           await ntour.save();
           res.json({message:"Tour added successfully"});
@@ -233,12 +234,17 @@ export const upldateInfo=async(req,res)=>{
        else{
         res.json({message:"Tour already exists"})
        }
-
-
-
     } catch (error) {
       res.send(error);
     }
+ }
+ export const getTour = async(req, res)=>{
+  try {
+    const data = await tourModal.find({});
+    res.send(data);
+  } catch (error) {
+    res.send(error)
+  }
  }
  
 
