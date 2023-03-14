@@ -157,29 +157,47 @@ export const upldateInfo=async(req,res)=>{
    else{
        user.otp=OTP;
        await user.save();
-       var transporter = nodemailer.createTransport({
-        service: 'gmail',
+   
+
+      const transporter = nodemailer.createTransport({
+        service:'outlook',
         auth: {
-          user: 'raghavkanpur11@gmail.com',
-          pass: 'Raghav179$'
+          user: 'dwiveditourtravels@outlook.com',
+          pass: 'Vimalraghav$'
         }
-      });
-      
-      var mailOptions = {
-        from: 'raghavkanpur11@gmail.com',
-        to: 'pandeyraghav349@gmail.com',
-        subject: 'Sending Email using Node.js',
-        text: 'That was easy! '+ OTP
-      };
-      
-      transporter.sendMail(mailOptions, function(error, info){
-        if (error) {
-          console.log(error);
-        } else {
-          console.log('Email sent: ' + info.response);
-        }
-      })
+    });
+    
+    var mailOptions = {
+      from: 'dwiveditourtravels@outlook.com',
+      to: 'raghavkanpur11@gmail.com',
+      subject: 'Sending Email using Node.js',
+      text: 'Your Otp for verification is '+OTP
+    };
+    transporter.sendMail(mailOptions, function(error, info){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent');
+      }
+      res.json({message:"Otp sent successfully"})
+    });
    }
+ }
+ export const confirmOtp = async(req, res)=>{
+  const user = await UserModal.findOne({email:req.body.email});
+  if(user === null)
+  {
+    res.json({message:"User is not registered yet"});
+  }
+  else{
+    if(req.body.otp===user.otp)
+    {
+      res.json({message:"Otp matched successfully", status:"matched"});
+    }
+    else{
+      res.json({message:"Otp dosen't matched", status:"Unmatched"});
+    }
+  }
  }
  
 
