@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux'
 
 
 
-function Navbar() {
+function AdminNavbar() {
   const [toolBar, setToolBar]  = useState(0);
   const [menuBar,setMenuBar]=useState(0);
 
@@ -91,11 +91,9 @@ useEffect(()=>{
       <img src={logo} alt="dwivedi" className="logo"/>
       </Link>
       <div className="nav-options" id='nav-options'>
-      <div className="btn nav-home"><Link to="/"><h5>Home</h5></Link></div>
-      <div className="btn nav-bookings"><Link to="/bookcabs"><h5>Book Cabs</h5></Link></div>
-       <div className="btn nav-cargo"><Link to="/cargo"><h5>Cargo</h5></Link></div>
-       <div className="btn nav-about"><Link to="/about"><h5>About</h5></Link></div>
-       <div className="btn nav-contact"><Link to="/contact"><h5>Contact Us</h5></Link></div>
+      <div className="btn nav-home"><Link to="/"><h5>Bookings</h5></Link></div>
+      <div className="btn nav-bookings"><Link to="/bookcabs"><h5>Tour</h5></Link></div>
+   
       </div>
      
     
@@ -109,11 +107,9 @@ useEffect(()=>{
     </div>
     </div>
     <div className="left-options l-options" id='left-options'>
-      <div className="btn nav-home l-options"><Link to="/"><h5 className='l-options'>Home</h5></Link></div>
-      <div className="btn nav-bookings l-options"><Link to="/bookcabs"><h5 className='l-options'>Book Cabs</h5></Link></div>
-       <div className="btn nav-cargo l-options"><Link to="/cargo"><h5 className='l-options'>Cargo</h5></Link></div>
-       <div className="btn nav-about l-options"><Link to="/about"><h5 className='l-options'>About</h5></Link></div>
-       <div className="btn nav-contact l-options"><Link to="/contact"><h5 className='l-options'>Contact Us</h5></Link></div>
+      <div className="btn nav-home l-options"><Link to="/"><h5 className='l-options'>Bookings</h5></Link></div>
+      <div className="btn nav-bookings l-options"><Link to="/bookcabs"><h5 className='l-options'>Tour</h5></Link></div>
+       
       </div>
     <div className="user-op options" id='user-op'>
       <ul className='options'>
@@ -127,6 +123,6 @@ useEffect(()=>{
   )
 }
 
-export default Navbar
+export default AdminNavbar
 
 

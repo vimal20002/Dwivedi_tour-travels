@@ -27,6 +27,7 @@ export const register = async (req, res) => {
     }
 
 }
+
 export const logIn=async(req,res)=>{
   
     try {
@@ -37,11 +38,11 @@ export const logIn=async(req,res)=>{
             res.json(user);
            }
            else{
-            res.send("Invalid Credentials");
+            res.json({message: "Invalid Credentials"});
            }
          }
          else{
-            res.send("User is not registered");
+          res.json({message: "Invalid Credentials"});
 
          }
     } catch (error) {

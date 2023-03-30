@@ -4,6 +4,7 @@ import RightImage from './RightImage'
 import Catalogue from './Catalogue'
 import Facilities from './Facilities'
 
+
 const Home = () => {
 
   return (

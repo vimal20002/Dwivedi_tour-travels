@@ -1,12 +1,19 @@
 import React, { useState } from 'react'
 import './login.css'
 import jbrdstiimg from '../components/images/register.png'
+import { register } from '../redux/features/userSlice'
+import { useDispatch} from 'react-redux'
+import { useHistory } from 'react-router-dom'
+import {toast} from "react-toastify"
+
+
 const Register = () => {
   const [name,setName]=useState("");
   const [email,setEmail]=useState("");
   const [password,setPassword]=useState("");
   const[cpassword,setCpassword]=useState("");
-
+   const dispatch=useDispatch();
+   const history=useHistory();
   const submitForm=()=>{
      
     const formData={
@@ -18,9 +25,11 @@ const Register = () => {
 
       if(cpassword===password){
         console.log(formData)
+        dispatch(register({formData,history,toast}))
       }
       else{
-        window.alert("Passwords do not match.")
+       toast.error("Passwords Do Not Match")
+       
       }
   }
 

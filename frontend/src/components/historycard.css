@@ -1,0 +1,15 @@
+.main-history-card{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: justify;
+    align-items: center;
+    background-color: rgba(156, 255, 222, 0.793);
+    box-shadow: 8px 8px 10px 0px rgba(225, 207, 207, 0.918);
+    column-gap: 120px;
+    row-gap: 40px;
+  
+    padding:20px 30px;
+    border-radius: 20px;
+     margin: 30px 30px;
+    
+}
