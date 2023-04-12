@@ -252,7 +252,7 @@ export const upldateInfo=async(req,res)=>{
 
 export const getBookings = async(req,res)=>{
   try {
-    const bookings = await adminModal.find({});
+    const bookings = await adminModal.find( {});
     console.log(bookings)
     res.json(bookings)
   } catch (error) {
@@ -270,3 +270,21 @@ export const delBooking = async(req, res)=>{
     res.send(error)
   }
  }
+export const deltour=async(req,res)=>{
+try {
+  await tourModal.deleteOne({_id:req.body._id})
+  const data = await tourModal.find({});
+  res.json(data);
+} catch (error) {
+  console.log(error)
+}
+}
+export const updateTour = async(req,res)=>{
+  try {
+    await tourModal.updateOne({_id:req.body._id},{...req.body})
+    const data = await tourModal.find({});
+    res.json(data);
+  } catch (error) {
+    console.log(error)
+  }
+}
