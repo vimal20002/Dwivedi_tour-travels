@@ -247,6 +247,14 @@ export const upldateInfo=async(req,res)=>{
     res.send(error)
   }
  }
+ export const delTour = async(req, res)=>{
+  try {
+    const tour = await tourModal.findOne({});
+    res.send(data);
+  } catch (error) {
+    res.send(error)
+  }
+ }
  
 
 
