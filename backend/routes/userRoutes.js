@@ -19,5 +19,5 @@ userRoute.post('/delbooking',delBooking);
 
 userRoute.get('/getbookings',getBookings);
 
-
+userRoute.patch('/updatetour',updateTour)
 export default userRoute
