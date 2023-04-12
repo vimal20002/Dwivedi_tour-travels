@@ -1,6 +1,7 @@
 import {createAsyncThunk,createSlice} from "@reduxjs/toolkit"
 import * as api from '../api'
 
+
 export const login = createAsyncThunk("auth/login",async({formData, history,toast})=>{
     try {
         const res = await api.login(formData);
@@ -27,7 +28,17 @@ export const register=createAsyncThunk("auth/register",async({formData,history,t
         return response.data;
     } catch (error) {
         console.log(error)
+        toast.error(error.message)
        
+    }
+})
+export const cardFetch=createAsyncThunk("gettour",async()=>{
+    try {
+        const response =await api.cardFetch();
+        return response?.data;
+    } catch (error) {
+        console.log(error);
+    
     }
 })
 const userSlice = createSlice({
@@ -36,8 +47,10 @@ const userSlice = createSlice({
         user:null,
         error:"",
         status:false,
-        loading:false
+        loading:false,
+        tour:null
     },
+
     extraReducers:{
         [login.pending]:(state, action)=>{
             state.loading=true;
@@ -64,7 +77,20 @@ const userSlice = createSlice({
         [register.rejected]:(state, action)=>{
             state.loading=false;
             state.error=action.payload.message;
+        },
+        [cardFetch.pending]:(state, action)=>{
+            state.loading=true;
+        },
+        [cardFetch.fulfilled]:(state, action)=>{
+            state.loading=false;
+            localStorage.setItem("cards",JSON.stringify({...action.payload?.data}));
+            state.tour = action.payload?.data;
+        },
+        [register.rejected]:(state, action)=>{
+            state.loading=false;
+            state.error=action.payload.message;
         }
+
     }
 })
 export default userSlice.reducer

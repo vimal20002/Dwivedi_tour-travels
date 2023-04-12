@@ -18,17 +18,17 @@ function App() {
 
        <Switch>
       <React.Fragment>
-    {/* <Navbar/>
-    <ToastContainer/> */}
-    {/* <Route exact path='/' ><Home/></Route>
+    <Navbar/>
+    <ToastContainer/> 
+    <Route exact path='/' ><Home/></Route>
     <Route exact path='/bookcabs' ><Booking/></Route>
     <Route exact path='/cargo' ><Booking/></Route>
     <Route exact path='/about' ><About/></Route>
     <Route exact path='/contact' ><Contact/></Route>
     <Route exact path='/login' ><LogIn/></Route>
     <Route exact path='/register' ><Register/></Route>
-    <Route exact path='/account' ><Account/></Route> */}
-    <Admin/>
+    <Route exact path='/account' ><Account/></Route>
+   {/* <Admin/> */}
      <Footer/>  
     </React.Fragment>
     </Switch>

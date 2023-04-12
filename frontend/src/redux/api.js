@@ -6,3 +6,6 @@ return API.post('/login', formData);
 export const register=(formData)=>{
     return API.post('/register',formData);
 }
+export const cardFetch=()=>{
+    return API.get('/gettour')
+}
