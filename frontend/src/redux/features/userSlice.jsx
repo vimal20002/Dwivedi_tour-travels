@@ -83,7 +83,8 @@ const userSlice = createSlice({
         },
         [cardFetch.fulfilled]:(state, action)=>{
             state.loading=false;
-            localStorage.setItem("cards",JSON.stringify({...action.payload?.data}));
+          
+            localStorage.setItem("cards",JSON.stringify(action.payload));
             state.tour = action.payload?.data;
         },
         [register.rejected]:(state, action)=>{
