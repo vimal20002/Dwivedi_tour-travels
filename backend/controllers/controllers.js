@@ -230,7 +230,8 @@ export const upldateInfo=async(req,res)=>{
          console.log(req.body)
           const ntour=new tourModal({...req.body});
           await ntour.save();
-          res.json({message:"Tour added successfully"});
+          const data = await tourModal.find({});
+          res.json(data);
        }
        else{
         res.json({message:"Tour already exists"})
@@ -247,8 +248,45 @@ export const upldateInfo=async(req,res)=>{
     res.send(error)
   }
  }
- 
+ export const delTour = async(req, res)=>{
+  console.log(req.body)
+  try {
+     await tourModal.deleteOne({_id:req.body._id})
+     const data = await tourModal.find({});
+     res.json(data)
+    } catch (error) {
+    res.send(error)
+  }
+ }
+ export const updateTour = async(req, res)=>{
+  console.log(req.body)
+  try {
+     await tourModal.findOneAndUpdate({_id:req.body._id},req.body);
+     const data = await tourModal.find({});
+     res.json(data)
+    } catch (error) {
+    res.send(error)
+  }
+ }
 
 
+export const getBookings = async(req,res)=>{
+  try {
+    const bookings = await adminModal.find({});
+    console.log(bookings)
+    res.json(bookings)
+  } catch (error) {
+    res.send(error)
+  }
+}
 
-
+export const delBooking = async(req, res)=>{
+  console.log(req.body)
+  try {
+     await adminModal.deleteOne({_id:req.body._id})
+     const data = await adminModal.find({});
+     res.json(data)
+    } catch (error) {
+    res.send(error)
+  }
+ }
