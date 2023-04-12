@@ -1,14 +1,15 @@
 .card-body img{
     width: 300px;
     height: 300px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    border-top-right-radius: 30px;
+    border-top-left-radius: 30px;
+    box-shadow: 0px 6px 8px 0px #F4E9D8;
+    margin-top: -8px;
 }
+
 .card-body{
-    /* border: 2px solid red; */
     background-color: whitesmoke;
-    border-top-right-radius: 20px;
-    border-top-left-radius: 20px;
+   border-radius: 30px;
     position: relative;
     box-shadow: 8px 8px 10px 0px rgba(225, 207, 207, 0.918);
     display: inline-flex;
@@ -16,29 +17,42 @@
     row-gap: 10px;
 }
 .card-title{
-    font-family: 'Tilt Neon', cursive;
+    background-color: white;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
     font-size: 23px;
+    margin-top: -3px;
     padding: 5px;
    color:rgba(0, 0, 0, 0.784);
-   margin-left: 10px;
+   padding: 10px;
 }
 .card-body:hover{
     box-shadow: 10px 10px 12px 0px rgba(120, 92, 205, 0.767);
 }
-.book-now{
-    font-family: 'Tilt Neon', cursive;
-    position: absolute;
-    top: 320px;
-    left: 180px;
-    font-size: 22px;
-    background-color:rgb(12, 3, 92) ;
-    color:rgb(255, 253, 253);    
-    border-radius: 8px;
-    padding: 5px;
-    box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.702);
-    cursor: pointer;
-    border: 2px black solid;
+
+.pricing-sec{
+    display: inline-flex;
+    flex-direction: column;
+    row-gap: 4px;
+
 }
+.payment-sec{
+    display: flex;
+    flex-direction: row;
+    column-gap: 90px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    margin-left: 11px;
+}
+.book-now{
+    border-radius: 45px;
+    background-color: #8482FF;
+    padding: 10px 20px;
+    color: white;
+    cursor: pointer;
+}
+
 .book-now:hover{
     background-color:whitesmoke;
     color:black;

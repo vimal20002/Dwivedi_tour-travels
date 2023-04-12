@@ -16,7 +16,7 @@ userRoute.post('/addtour',addTour);
 userRoute.get('/gettour',getTour);
 userRoute.post('/deltour',deltour);
 userRoute.post('/delbooking',delBooking);
-userRoute.patch('/updatetour',updateTour);
+
 userRoute.get('/getbookings',getBookings);
 
 
