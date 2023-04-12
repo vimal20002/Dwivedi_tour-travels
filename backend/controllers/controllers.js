@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs"
 import { querryModal } from "../modals/querrySchema.js"
 import nodemailer from "nodemailer"
 import { tourModal } from "../modals/tourModal.js"
-
+import { v4 as uuidv4 } from 'uuid';
 export const register = async (req, res) => {
     try {
         let user = await UserModal.findOne({ email: req.body.email })
@@ -224,10 +224,11 @@ export const upldateInfo=async(req,res)=>{
   } 
  }
  export const addTour=async(req,res)=>{
-    try {
+   console.log(req.body)
+  const admin = await UserModal.findOne({email:"shubham@admin.com"})
+  if(admin.token===req.body.token){
       const tour=await tourModal.findOne({title:req.body.title});
       if(tour===null){
-         console.log(req.body)
           const ntour=new tourModal({...req.body});
           await ntour.save();
           const data = await tourModal.find({});
@@ -236,9 +237,11 @@ export const upldateInfo=async(req,res)=>{
        else{
         res.json({message:"Tour already exists"})
        }
-    } catch (error) {
-      res.send(error);
     }
+    else{
+      res.json({message:"You are not a admin"})
+    }
+    
  }
  export const getTour = async(req, res)=>{
   try {
@@ -251,40 +254,80 @@ export const upldateInfo=async(req,res)=>{
  
 
 export const getBookings = async(req,res)=>{
-  try {
-    const bookings = await adminModal.find( {});
-    console.log(bookings)
-    res.json(bookings)
-  } catch (error) {
-    res.send(error)
-  }
+  console.log(req.body)
+  const admin = await UserModal.findOne({email:"shubham@admin.com"})
+    if(admin?.token===req.body.token){
+      const bookings = await adminModal.find( {});
+      console.log(bookings)
+      res.json(bookings)
+    }
+    else{
+      res.json({message:"You are not a admin"})
+    }
 }
 
 export const delBooking = async(req, res)=>{
-  console.log(req.body)
-  try {
-     await adminModal.deleteOne({_id:req.body._id})
-     const data = await adminModal.find({});
-     res.json(data)
-    } catch (error) {
-    res.send(error)
-  }
+  const admin = await UserModal.findOne({email:"shubham@admin.com"})
+    if(admin?.token===req.body.token){
+      await adminModal.deleteOne({_id:req.body._id})
+      const data = await adminModal.find({});
+      res.json(data)
+    }
+    else{
+      res.json({message:"You are not a admin"})
+    }
+  
  }
 export const deltour=async(req,res)=>{
-try {
-  await tourModal.deleteOne({_id:req.body._id})
+  try {
+    const admin = await UserModal.findOne({email:"shubham@admin.com"})
+    if(admin.token===req.body.token){
+      console.log("hey")
+      await tourModal.deleteOne({_id:req.body._id})
   const data = await tourModal.find({});
   res.json(data);
-} catch (error) {
-  console.log(error)
-}
-}
-export const updateTour = async(req,res)=>{
-  try {
-    await tourModal.updateOne({_id:req.body._id},{...req.body})
-    const data = await tourModal.find({});
-    res.json(data);
+    }
+    else{
+      res.json({message:"You are not a admin"})
+    }
   } catch (error) {
     console.log(error)
   }
+
+}
+export const updateTour = async(req,res)=>{
+  try {
+    const admin = await UserModal.findOne({email:"shubham@admin.com"})
+    if(admin?.token===req.body.token){
+    await tourModal.updateOne({_id:req.body._id},{...req.body})
+    const data = await tourModal.find({});
+    res.json(data);
+    }
+    else{
+      res.json({message:"You are not a admin"})
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+export const adminLogin =async(req,res)=>{
+  console.log(req.body)
+try {
+  const admin = await UserModal.findOne({email:req.body.email})
+  const token = uuidv4();
+  const date = new Date()
+  console.log(date.getMonth())
+  const pass = date.getUTCDate().toString()+(date.getMonth()+1).toString()+date.getFullYear().toString();
+  if(pass===req.body.password){
+  admin.token=token;
+  await admin.save();
+  console.log(admin)
+  res.json({token:token})
+  }
+  else{
+    res.json({message:"You are not a admin"})
+  }
+} catch (error) {
+  console.log(error.message)
+}
 }
