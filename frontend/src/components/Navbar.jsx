@@ -3,20 +3,24 @@ import logo from './images/logo.png'
 import userimg from './images/user.png'
 import "./navbar.css"
 import menu from './images/menu.png'
-import  {Link} from 'react-router-dom'
-import { useSelector } from 'react-redux'
-
+import  {Link, useHistory} from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { logOut } from '../redux/features/userSlice'
+import {toast} from "react-toastify"
 
 
 function Navbar() {
   const [toolBar, setToolBar]  = useState(0);
   const [menuBar,setMenuBar]=useState(0);
-
+   const history=useHistory();
+   const dispatch=useDispatch();
 
  const {status}=useSelector((state)=>({...state.user}));
 
 console.log(status);
-
+    const handleLogout=()=>{
+    dispatch(logOut({history,toast}));
+    }
 useEffect(()=>{
   if(status){
     console.log(status)
@@ -120,7 +124,9 @@ useEffect(()=>{
         <Link to="/account">
         <li className='options'>Account</li>
         </Link>
-        <li className='options'>Log Out</li>
+        <li className='options'
+          onClick={()=>{handleLogout()}}
+        >Log Out</li>
       </ul>
     </div>
     </>

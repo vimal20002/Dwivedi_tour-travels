@@ -1,14 +1,21 @@
 import React, { useState } from 'react'
 import './contact.css'
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import {toast} from "react-toastify"
+
+import { sendQuerry } from '../redux/features/userSlice';
 const Contact = () => {
   const [email, setEmail] = useState("");
   const [querry, setQuerry] = useState("");
+  const history=useHistory();
+  const dispatch=useDispatch();
   const submitForm = ()=>{
     const formData={
       email:email,
       querry:querry,
     }
-    console.log(formData)
+    dispatch(sendQuerry({formData,history,toast}))
   }
   return (
     <>

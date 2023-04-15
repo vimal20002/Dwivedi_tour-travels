@@ -57,10 +57,8 @@ useEffect(() => {
        <img src={profileimg} alt="profileimg" />
       <input type="email" name="email" placeholder='info@example.com' value={email} onChange={(e)=>{setEmail(e.target.value)}} autoFocus  id="email" />
       <input type="password" name="password" placeholder='password' autoFocus value={password} onChange={(e)=>{setPassword(e.target.value)}}  id="password" />
-      <div className="book-btn" onClick={()=>{submitForm()}}
-      
-
-      >
+     <Link to='/getemail'><h4 className='forgot-password'>Forgot Password ?</h4></Link> 
+      <div className="book-btn" onClick={()=>{submitForm()}}  >
         
         Log In</div>
       <p>Do not have an account ? <Link to="/register"><span className='registeropt' >Register</span></Link></p>

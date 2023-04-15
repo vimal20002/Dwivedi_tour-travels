@@ -1,0 +1,46 @@
+.main-catalog{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 30px 50px;
+    column-gap: 100px;
+    justify-content: center;
+    align-items: center;
+    row-gap: 60px;
+}
+
+.plan-2{
+    display: flex;
+    border-radius: 20px;
+    height: 380px;
+    flex-direction: column;
+    row-gap: 10px;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: rgba(248, 232, 232, 0.948);
+    box-shadow: 8px 8px 10px 0px rgba(225, 207, 207, 0.918);
+}
+
+
+.plan-2:hover{
+    box-shadow: 10px 10px 12px 0px rgba(120, 92, 205, 0.767);
+}
+
+.line{
+    width: 200px;
+    background-color: black;
+}
+.bookk-now{
+    border-radius: 45px;
+    margin-top: 20px;
+    background-color: #8482FF;
+    padding: 10px 20px;
+    color: white;
+    cursor: pointer;
+}
+
+.bookk-now:hover{
+    background-color:whitesmoke;
+    color:black;
+    box-shadow:4px 4px 6px 0px rgba(120, 92, 205, 0.767);
+}

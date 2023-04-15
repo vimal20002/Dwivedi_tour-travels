@@ -69,10 +69,10 @@ export const googleLogin=async(req,res)=>{
 
 export const bookCab=async(req,res)=>{
        try {
+        console.log(req.body);
          const user=await UserModal.findOne({email:req.body.email});
+         const username=user.name;
          const nbooking={
-            vehicle:req.body.vehicle,
-            phone:req.body.phone,
             pickLoc:req.body.pickLoc,
             dest:req.body.dest,
             date:req.body.date,
@@ -85,11 +85,63 @@ export const bookCab=async(req,res)=>{
          await user.save();
          const admininfo= new adminModal({bookings:req.body});
          await admininfo.save();
-         console.log(admininfo)
-         res.json({message:"Cab booked successfully!"});
+       
+         var digits = '0123456789';
+         let OTP = '';
+         for (let i = 0; i < 4; i++ ) {
+             OTP += digits[Math.floor(Math.random() * 10)];
+         }
+
+
+
+         const transporter = nodemailer.createTransport({
+          service:'outlook',
+          pool:true,
+          auth: {
+            user: 'dwiveditourtravels@outlook.com',
+            pass: 'Vimalraghav$'
+          }
+      });
+      
+      var mailOptions = {
+        from: 'dwiveditourtravels@outlook.com',
+        to: req.body.email,
+        subject: 'OTP For Your Ride',
+        text: `Dear Customer,   
+   Your Cab Has Been Booked Succefully.Please Share The Given OTP  ${OTP}  With Our Driver To Start Your Ride. Happey Journey ! 
+
+        Regards,
+        Shubham Dwivedi (Founder & CEO DT&Travels)`
+      };
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent');
+        }
+      })
+      
+    
+    var mailOptionss = {
+      from: 'dwiveditourtravels@outlook.com',
+      to: 'skk180509@gmail.com',
+      subject: 'New Booking',
+      text: `Dear Owner,
+      There has been a booking from  ${username} for a ride. His confirmation OTP is ${OTP}.
+      You can contact him at 989983339 for further details`
+    };
+    transporter.sendMail(mailOptionss, function(error, info){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent');
+      }
+    })
+
+         res.json({message:"Cab booked successfully! Check Mail!"});
        } catch (error) {
         res.send(error);
-       }
+       }  
 }
 export const bookCargo=async(req,res)=>{
     try {
@@ -148,6 +200,7 @@ export const upldateInfo=async(req,res)=>{
  }
  export const genOtp=async(req,res)=>{
    try {
+    console.log(req.body);
     var digits = '0123456789';
     let OTP = '';
     for (let i = 0; i < 4; i++ ) {
@@ -213,6 +266,7 @@ export const upldateInfo=async(req,res)=>{
  }
  export const updatePassword=async(req,res)=>{
   try {
+    
     const user=await UserModal.findOne({email:req.body.email});
     const salt = await bcrypt.genSalt(10)
     const npass = await bcrypt.hash(req.body.password, salt);
@@ -249,24 +303,111 @@ export const upldateInfo=async(req,res)=>{
   }
  }
  
-
-export const getBookings = async(req,res)=>{
-  try {
-    const bookings = await adminModal.find({});
-    console.log(bookings)
-    res.json(bookings)
-  } catch (error) {
-    res.send(error)
-  }
+ export const getBookings = async(req,res)=>{
+  const admin = await UserModal.findOne({email:"shubham@admin.com"})
+    if(admin?.token===req.body.token){
+      const bookings = await adminModal.find( {});
+      console.log(bookings)
+      res.json(bookings)
+    }
+    else{
+      res.json({message:"You are not an admin"})
+    }
 }
 
 export const delBooking = async(req, res)=>{
+  const admin = await UserModal.findOne({email:"shubham@admin.com"})
+    if(admin?.token===req.body.token){
+      await adminModal.deleteOne({_id:req.body._id})
+      const data = await adminModal.find({});
+      res.json(data)
+    }
+    else{
+      res.json({message:"You are not an admin"})
+    }
+  
+ }
+export const deltour=async(req,res)=>{
+  try {
+    const admin = await UserModal.findOne({email:"shubham@admin.com"})
+    if(admin.token===req.body.token){
+      console.log("hey")
+      await tourModal.deleteOne({_id:req.body._id})
+  const data = await tourModal.find({});
+  res.json(data);
+    }
+    else{
+      res.json({message:"You are not an admin"})
+    }
+  } catch (error) {
+    console.log(error)
+  }
+
+}
+export const delreview=async(req,res)=>{
   console.log(req.body)
   try {
-     await adminModal.deleteOne({_id:req.body._id})
-     const data = await adminModal.find({});
-     res.json(data)
-    } catch (error) {
-    res.send(error)
+    const admin = await UserModal.findOne({email:"shubham@admin.com"})
+    if(admin.token===req.body.token){
+      await querryModal.deleteOne({_id:req.body._id})
+  const data = await querryModal.find({});
+  res.json(data);
+    }
+    else{
+      res.json({message:"You are not an admin"})
+    }
+  } catch (error) {
+    console.log(error)
   }
- }
+
+}
+export const updateTour = async(req,res)=>{
+  try {
+    const admin = await UserModal.findOne({email:"shubham@admin.com"})
+    if(admin?.token===req.body.token){
+    await tourModal.updateOne({_id:req.body._id},{...req.body})
+    const data = await tourModal.find({});
+    res.json(data);
+    }
+    else{
+      res.json({message:"You are not an admin"})
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+export const adminLogin =async(req,res)=>{
+  console.log(req.body)
+try {
+  const admin = await UserModal.findOne({email:req.body.email})
+  const token = uuidv4();
+  const date = new Date()
+  console.log(date.getMonth())
+  const pass = date.getUTCDate().toString()+(date.getMonth()+1).toString()+date.getFullYear().toString();
+  if(pass===req.body.password){
+  admin.token=token;
+  await admin.save();
+  console.log(admin)
+  res.json({token:token})
+  }
+  else{
+    res.json({message:"You are not an admin"})
+  }
+} catch (error) {
+  console.log(error.message)
+}
+}
+export const getQuerry = async(req,res)=>{
+  try {
+    const admin = await UserModal.findOne({email:"shubham@admin.com"})
+    if(admin?.token===req.body.token){
+    const data = await querryModal.find({})
+    res.json(data);
+    }
+    else{
+      res.json({message:"You are not an admin"})
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}

@@ -17,7 +17,7 @@ const Catalogue = () => {
          <hr />
     <div className="catalogue">
     {dummyData?.map((e)=>{
-         return <CardElement title={e.title} imgUrl={e.imgUrl} price={e.price}/>
+         return <CardElement title={e.title} imgUrl={e.imgUrl} price={e.price} id={e._id}/>
     })}
    </div>
     </div>
