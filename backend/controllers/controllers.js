@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs"
 import { querryModal } from "../modals/querrySchema.js"
 import nodemailer from "nodemailer"
 import { tourModal } from "../modals/tourModal.js"
-
+import { v4 as uuidv4 } from 'uuid';
 export const register = async (req, res) => {
     try {
         let user = await UserModal.findOne({ email: req.body.email })
@@ -278,10 +278,11 @@ export const upldateInfo=async(req,res)=>{
   } 
  }
  export const addTour=async(req,res)=>{
-    try {
+   console.log(req.body)
+  const admin = await UserModal.findOne({email:"shubham@admin.com"})
+  if(admin.token===req.body.token){
       const tour=await tourModal.findOne({title:req.body.title});
       if(tour===null){
-         console.log(req.body)
           const ntour=new tourModal({...req.body});
           await ntour.save();
           const data = await tourModal.find({});
@@ -290,9 +291,11 @@ export const upldateInfo=async(req,res)=>{
        else{
         res.json({message:"Tour already exists"})
        }
-    } catch (error) {
-      res.send(error);
     }
+    else{
+      res.json({message:"You are not a admin"})
+    }
+    
  }
  export const getTour = async(req, res)=>{
   try {

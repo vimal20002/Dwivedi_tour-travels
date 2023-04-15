@@ -1,5 +1,5 @@
 import express from "express"
-import { logIn, register, querry, googleLogin, bookCab, bookCargo, uploadImage, upldateInfo, genOtp, confirmOtp, updatePassword, addTour, getTour, getBookings, delBooking, updateTour, adminLogin, getQuerry } from "../controllers/controllers.js";
+import { logIn, register, querry, googleLogin, bookCab, bookCargo, uploadImage, upldateInfo, genOtp, confirmOtp, updatePassword, addTour, getTour, getBookings, delBooking, updateTour, adminLogin, getQuerry, deltour } from "../controllers/controllers.js";
 const userRoute = express.Router();
 userRoute.post('/register',register);
 userRoute.post('/login',logIn);
@@ -14,9 +14,10 @@ userRoute.post('/confirmotp',confirmOtp);
 userRoute.post('/updatepassword',updatePassword);
 userRoute.post('/addtour',addTour);
 userRoute.get('/gettour',getTour);
+userRoute.post('/deltour',deltour);
 userRoute.post('/delbooking',delBooking);
 
-userRoute.get('/getbookings',getBookings);
+userRoute.post('/getbookings',getBookings);
 
 userRoute.patch('/updatetour',updateTour)
 userRoute.post('/adminlogin',adminLogin)
