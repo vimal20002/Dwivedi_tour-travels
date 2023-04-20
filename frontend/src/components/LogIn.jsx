@@ -5,7 +5,7 @@ import { Link ,useHistory} from 'react-router-dom'
 import { GoogleLogin } from "react-google-login"
 import { gapi } from 'gapi-script';
 import { useDispatch} from 'react-redux'
-import { login } from '../redux/features/userSlice'
+import { glogin, login } from '../redux/features/userSlice'
 import {toast} from "react-toastify"
 import {useFormik} from "formik"
 import * as Yup from "yup"
@@ -49,6 +49,12 @@ const LogIn = () => {
     const nm = resp.profileObj.familyName;
     const em = resp.profileObj.email;
     console.log(nm, em);
+    const formData={
+      email:resp.profileObj.email,
+      name:resp.profileObj.familyName,
+      googleId:resp.profileObj.googleId
+    }
+    dispatch(glogin({formData,history,toast}))
   }
   const onFailure = (err) => {
     console.log(err)

@@ -21,6 +21,23 @@ export const login = createAsyncThunk("auth/login",async({formData, history,toas
         toast.error(error.message);
     }
 })
+export const glogin = createAsyncThunk("auth/glogin",async({formData, history,toast})=>{
+    try {
+        const res = await api.glogin(formData);
+        if(res.data._id){
+        toast.success("LogIn Successfull")
+        history.push("/");
+        console.log(res.data)
+        return res.data;
+        }
+        else{
+            toast.error(res.data.message);
+        }
+    } catch (error) {
+        console.log(error)
+        toast.error(error.message);
+    }
+})
 export const register=createAsyncThunk("auth/register",async({formData,toast})=>{
     try {
         const response=await api.register(formData);
@@ -178,6 +195,21 @@ const userSlice = createSlice({
             state.user = action.payload.data;
         },
         [login.rejected]:(state, action)=>{
+            state.loading=false;
+            state.status=false;
+            state.error=action.payload.message;
+        },
+        [glogin.pending]:(state, action)=>{
+            state.loading=true;
+        },
+        [glogin.fulfilled]:(state, action)=>{
+            state.loading=false;
+            state.status=true;
+            console.log(action.payload);
+            localStorage.setItem("user",JSON.stringify(action.payload));
+            state.user = action.payload.data;
+        },
+        [glogin.rejected]:(state, action)=>{
             state.loading=false;
             state.status=false;
             state.error=action.payload.message;

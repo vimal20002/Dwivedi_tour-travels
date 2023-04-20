@@ -3,6 +3,9 @@ const API = axios.create({baseURL:"http://localhost:8000"});
 export const login = (formData)=>{
 return API.post('/login', formData);
 }
+export const glogin = (formData)=>{
+    return API.post('/googleLogin', formData);
+    }
 export const register=(formData)=>{
     return API.post('/register',formData);
 }

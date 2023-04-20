@@ -7,12 +7,14 @@ import lod from "./images/lod.gif"
 const Catalogue = () => {
      const [data,setData]=useState(null)
   const dispatch =useDispatch();
-  useEffect(()=>{
-     console.log("hey")
-   dispatch(cardFetch());
-  },[])
   const {loading,tour} = useSelector((state)=>({...state.user}))
-  const dummyData=JSON.parse(localStorage.getItem("cards"));
+  useEffect(()=>{
+   dispatch(cardFetch());
+},[])
+useEffect(()=>{
+       setData(tour)
+       setData(JSON.parse(localStorage.getItem("cards")))
+  },[loading,tour])
   
   return (<>
     <div className="main-ct">
@@ -23,7 +25,7 @@ const Catalogue = () => {
          <br />
          <hr />
     <div className="catalogue">
-    {dummyData && dummyData?.map((e)=>{
+    {data && data?.map((e)=>{
          return <CardElement title={e.title} imgUrl={e.imgUrl} price={e.price} id={e._id}/>
     })}
    </div>

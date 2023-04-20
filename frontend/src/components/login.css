@@ -55,6 +55,10 @@
     .loginForm{
         padding: 10px;
     }
+    .loginForm input
+    {
+        width: 300px;
+    }
     .registerForm{
         padding: 10px;
     }
