@@ -28,6 +28,9 @@
 
 }
 @media screen and (max-width:450px) {
+    .getInTouch{
+        margin: 0px;
+    }
     .getInTouch input{
         width: 300px;
     }

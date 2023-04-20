@@ -101,6 +101,7 @@ useEffect(() => {
           onSuccess={onSuccess}
           onFailure={onFailure}
           cookiePolicy={'single_host_origin'}
+          redirectUri='https://dwiveditourstravels.netlify.app/'
         />
      </div>
      </div>

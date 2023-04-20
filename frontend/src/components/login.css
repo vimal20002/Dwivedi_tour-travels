@@ -54,6 +54,7 @@
 @media screen and (max-width:450px) {
     .loginForm{
         padding: 10px;
+        margin: 98px 4px;
     }
     .loginForm input
     {
