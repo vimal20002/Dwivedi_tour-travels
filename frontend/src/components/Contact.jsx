@@ -11,11 +11,16 @@ const Contact = () => {
   const history=useHistory();
   const dispatch=useDispatch();
   const submitForm = ()=>{
+    if(email&&querry){
     const formData={
       email:email,
       querry:querry,
     }
     dispatch(sendQuerry({formData,history,toast}))
+  }
+  else{
+    toast.error("Please fill details")
+  }
   }
   return (
     <>

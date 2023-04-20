@@ -4,10 +4,12 @@ import PastBookedCard from './PastBookedCard'
 import { useDispatch, useSelector } from 'react-redux';
 import { userbooking } from '../redux/features/userSlice';
 import lod from "./images/lod.gif"
+import { useHistory } from 'react-router-dom';
 const Account = () => {
     const accountInfo=JSON.parse(localStorage.getItem("user"));
     const dispatch = useDispatch()
     const [data,setDt]=useState(null);
+    const history = useHistory()
     const {booking,loading}=useSelector((state)=>({...state.user}))
     const getBooking=()=>{
       console.log(accountInfo)
@@ -19,6 +21,13 @@ const Account = () => {
       setDt(booking)
 
     },[data,booking])
+    const {status}=useSelector((state)=>({...state.user}));
+    useEffect(()=>{
+      if(accountInfo===null &&status===false)
+      {
+        history.push('/login')
+      }
+    })
     
   return (
     <>
