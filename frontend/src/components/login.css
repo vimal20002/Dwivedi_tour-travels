@@ -47,6 +47,10 @@
     width:100px;
     margin-left: 20px;
 }
+.err{
+    color: red;
+}
+
 @media screen and (max-width:450px) {
     .loginForm{
         padding: 10px;

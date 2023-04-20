@@ -10,6 +10,7 @@ export const login = createAsyncThunk("auth/login",async({formData, history,toas
         if(res.data._id){
         toast.success("LogIn Successfull")
         history.push("/");
+        console.log(res.data)
         return res.data;
         }
         else{
@@ -20,13 +21,24 @@ export const login = createAsyncThunk("auth/login",async({formData, history,toas
         toast.error(error.message);
     }
 })
-export const register=createAsyncThunk("auth/register",async({formData,history,toast})=>{
+export const register=createAsyncThunk("auth/register",async({formData,toast})=>{
     try {
         const response=await api.register(formData);
-        toast.success("Registered Successfully");
+        toast.success(response.data.message);
+        return;
+    } catch (error) {
+        console.log(error)
+        toast.error(error.message)
+       
+    }
+})
+export const regOtp=createAsyncThunk("auth/regotp",async({formData,history,toast})=>{
+    try {
+        const response=await api.regOtp(formData);
+        toast.success(response.data.message);
         history.push("/login");
 
-        return response.data;
+        return;
     } catch (error) {
         console.log(error)
         toast.error(error.message)
@@ -36,6 +48,7 @@ export const register=createAsyncThunk("auth/register",async({formData,history,t
 export const cardFetch=createAsyncThunk("gettour",async()=>{
     try {
         const response =await api.cardFetch();
+        // console.log(response)
         return response?.data;
     } catch (error) {
         console.log(error);
@@ -48,7 +61,9 @@ export const bookCabs=createAsyncThunk("bookcabs",async({formData,history,toast}
       
     if(response.data.message){
         toast.success(response.data.message);
-        history.push("/");
+        // history.push("/");
+        localStorage.setItem("bk",JSON.stringify(response.data.bk))
+    
     }else{
     toast.error("Something Went Wrong!")
     }
@@ -77,7 +92,7 @@ export const sendQuerry=createAsyncThunk("querry",async({formData,history,toast}
 export const logOut=createAsyncThunk("logout",async({history,toast})=>{
     try {
        
-                   localStorage.removeItem("data");
+                   localStorage.removeItem("user");
                    history.push("/");
                    toast.success("Logged out Succefully !");
         
@@ -127,6 +142,15 @@ export const updatePassword=createAsyncThunk("updatepassword",async({formData,hi
         console.log(error);
     }
 })
+export const userbooking=createAsyncThunk("userbooking",async(formData)=>{
+    console.log(formData)
+    try {
+        const response=await api.userbooking(formData);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+})
 
 const userSlice = createSlice({
     name:"user",
@@ -138,7 +162,8 @@ const userSlice = createSlice({
         booking:null,
         querry:null,
         logout:null,
-        tour:null
+        tour:null,
+        bid:null,
     },
 
     extraReducers:{
@@ -149,24 +174,12 @@ const userSlice = createSlice({
             state.loading=false;
             state.status=true;
             console.log(action.payload);
-            localStorage.setItem("data",JSON.stringify(action.payload));
+            localStorage.setItem("user",JSON.stringify(action.payload));
             state.user = action.payload.data;
         },
         [login.rejected]:(state, action)=>{
             state.loading=false;
             state.status=false;
-            state.error=action.payload.message;
-        },
-        [register.pending]:(state, action)=>{
-            state.loading=true;
-        },
-        [register.fulfilled]:(state, action)=>{
-            state.loading=false;
-            localStorage.setItem("data",JSON.stringify(action.payload));
-            state.user = action.payload.data;
-        },
-        [register.rejected]:(state, action)=>{
-            state.loading=false;
             state.error=action.payload.message;
         },
         [cardFetch.pending]:(state, action)=>{
@@ -182,9 +195,22 @@ const userSlice = createSlice({
         },
         [bookCabs.fulfilled]:(state, action)=>{
             state.loading=false;
-            state.booking = action.payload?.data;
+            state.bid=action.payload?.bk?._id
+            localStorage.setItem("bid",JSON.stringify(action.payload?.bk?._id))
         },
         [bookCabs.rejected]:(state, action)=>{
+            state.loading=false;
+            state.error=action.payload?.message;
+        },
+        [userbooking.pending]:(state, action)=>{
+            state.loading=true;
+        },
+        [userbooking.fulfilled]:(state, action)=>{
+            state.loading=false;
+            state.booking=action.payload;
+            localStorage.setItem("booking",JSON.stringify(action.payload))
+        },
+        [userbooking.rejected]:(state, action)=>{
             state.loading=false;
             state.error=action.payload?.message;
         },

@@ -5,6 +5,10 @@ import { querryModal } from "../modals/querrySchema.js"
 import nodemailer from "nodemailer"
 import { tourModal } from "../modals/tourModal.js"
 import { v4 as uuidv4 } from 'uuid';
+import Razorpay from "razorpay"
+import crypto from "crypto"
+import { Payement } from "../modals/payementModal.js"
+import { Bookingmodal } from "../modals/bookingModal.js"
 export const register = async (req, res) => {
     try {
         let user = await UserModal.findOne({ email: req.body.email })
@@ -16,10 +20,44 @@ export const register = async (req, res) => {
             const salt = await bcrypt.genSalt(10)
             const hpass = await bcrypt.hash(req.body.password, salt);
             // console.log(req.body)
-            const nuser = new UserModal({ ...req.body, password: hpass });
+            
+            var digits = '0123456789';
+            let OTP = '';
+            for (let i = 0; i < 4; i++ ) {
+              OTP += digits[Math.floor(Math.random() * 10)];
+            }
+            const nuser = new UserModal({ ...req.body, password: hpass,otp:OTP });
             console.log(nuser)
             await nuser.save();
-            res.json(nuser);
+
+
+
+         const transporter = nodemailer.createTransport({
+          service:'outlook',
+          pool:true,
+          auth: {
+            user: 'dwiveditourtravels@outlook.com',
+            pass: 'Vimalraghav$'
+          }
+      });
+      
+      var mailOptions = {
+        from: 'dwiveditourtravels@outlook.com',
+        to: req.body.email,
+        subject: 'OTP For Your Email confirmation',
+        text: `Dear Customer,\n
+        Otp for your email verification is${OTP} confirm your email to start journey with us\n
+        Regards,\n
+        Shubham Dwivedi (Founder & CEO DT&Travels)`
+      };
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent');
+        }
+      })
+            res.json({message:"Otp sent Successfully"});
         }
 
     } catch (error) {
@@ -27,15 +65,33 @@ export const register = async (req, res) => {
     }
 
 }
-
+export const confirmOtpSignup=async(req,res)=>{
+  console.log(req.body)
+try {
+  const user = await UserModal.findOne({email:req.body.email})
+  if(user?.otp===req.body.otp)
+  {
+    user.valid =true;
+    await user.save();
+    res.json({message:"Verified successfully"})
+  }
+  else{
+    user.valid =false;
+    await user.save();
+    res.json({message:"Invalid Otp"})
+  }
+} catch (error) {
+  console.log(error)
+}
+}
 export const logIn=async(req,res)=>{
   
     try {
          const user=await UserModal.findOne({email:req.body.email});
          if(user!==null){
            const passwordCompare= await bcrypt.compare(req.body.password,user.password)
-           if(passwordCompare){
-            res.json(user);
+           if(passwordCompare && user.valid){
+                        res.json(user);
            }
            else{
             res.json({message: "Invalid Credentials"});
@@ -65,6 +121,16 @@ export const googleLogin=async(req,res)=>{
     }
 }
 
+export const getuserBooking=async(req,res)=>{
+  console.log(req.body)
+  try {
+    const data = await Bookingmodal.find({email:req.body.email})
+    console.log(data)
+   res.json(data);
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 
 export const bookCab=async(req,res)=>{
@@ -73,19 +139,17 @@ export const bookCab=async(req,res)=>{
          const user=await UserModal.findOne({email:req.body.email});
          const username=user.name;
          const nbooking={
+          name:username,
+          email:req.body.email,
             pickLoc:req.body.pickLoc,
             dest:req.body.dest,
             date:req.body.date,
             time:req.body.time,
-            feed:req.body.feed
+            price:req.body.price,
          }
-         const arr = user.bookings;
-         arr.push(nbooking)
-         user.bookings = arr;
-         await user.save();
-         const admininfo= new adminModal({bookings:req.body});
-         await admininfo.save();
-       
+   
+        const bk=new Bookingmodal(nbooking)
+        await bk.save()
          var digits = '0123456789';
          let OTP = '';
          for (let i = 0; i < 4; i++ ) {
@@ -138,7 +202,7 @@ export const bookCab=async(req,res)=>{
       }
     })
 
-         res.json({message:"Cab booked successfully! Check Mail!"});
+         res.json({message:"Cab booked successfully! Check Mail!",bk:bk});
        } catch (error) {
         res.send(error);
        }  
@@ -297,9 +361,11 @@ export const upldateInfo=async(req,res)=>{
     }
     
  }
+
  export const getTour = async(req, res)=>{
   try {
     const data = await tourModal.find({});
+    console.log(data)
     res.send(data);
   } catch (error) {
     res.send(error)
@@ -309,7 +375,7 @@ export const upldateInfo=async(req,res)=>{
  export const getBookings = async(req,res)=>{
   const admin = await UserModal.findOne({email:"shubham@admin.com"})
     if(admin?.token===req.body.token){
-      const bookings = await adminModal.find( {});
+      const bookings = await Bookingmodal.find( {});
       console.log(bookings)
       res.json(bookings)
     }
@@ -321,8 +387,8 @@ export const upldateInfo=async(req,res)=>{
 export const delBooking = async(req, res)=>{
   const admin = await UserModal.findOne({email:"shubham@admin.com"})
     if(admin?.token===req.body.token){
-      await adminModal.deleteOne({_id:req.body._id})
-      const data = await adminModal.find({});
+      await Bookingmodal.deleteOne({_id:req.body._id})
+      const data = await Bookingmodal.find({});
       res.json(data)
     }
     else{
@@ -413,4 +479,48 @@ export const getQuerry = async(req,res)=>{
   } catch (error) {
     console.log(error)
   }
+}
+const secret = "Nub46Ml99qlMjqR5lgyWuMRu"
+const key = "rzp_test_hnhwpr4PlYB0mw"
+export const payFun =async(req, res)=>{
+  console.log(req.body)
+    try {
+        console.log(req.body.amount)
+         const instance = new Razorpay({
+            key_id: key,
+            key_secret: secret,
+          });
+          const options = {
+            amount: Number(req.body.amount*100), // amount in the smallest currency unit
+            currency: "INR",
+          };
+          const order = await instance.orders.create(options) 
+        const bk=await Bookingmodal.findOne({_id:req.body._id});
+        bk.pid = order?.id
+        bk.price=req.body.amount;
+        await bk.save()
+        console.log(bk)
+        res.json(order);  
+    } catch (error) {
+        console.log(error)
+    }
+    
+}
+export const paymentverification =async(req, res)=>{
+  console.log(req.body)
+  let body=req.body.razorpay_order_id + "|" + req.body.razorpay_payment_id;
+
+  var expectedSignature = crypto.createHmac('sha256', secret)
+                                  .update(body.toString())
+                                  .digest('hex');
+  var response = {"signatureIsValid":"false"}
+  if(expectedSignature === req.body.razorpay_signature){
+   const py= new Payement(req.body)
+   console.log(py)
+   await py.save();
+   const bk=await Bookingmodal.findOne({pid:req.body.razorpay_order_id});
+   bk.paid = true;
+   await bk.save();
+      res.redirect("http://localhost:3000");
+  }
 }

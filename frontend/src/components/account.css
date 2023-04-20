@@ -64,7 +64,7 @@
     display: flex;
     flex-wrap: wrap;
     row-gap: 15px;
-    column-gap: 400px;
+    column-gap: 100px;
     width: 100%;
     background-color: rgba(156, 255, 222, 0.793);
      border-radius: 10px;

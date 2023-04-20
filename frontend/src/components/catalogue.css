@@ -4,7 +4,9 @@
     justify-content: center;
     align-items: center;
 }
-
+.ldd{
+    margin-top: 90px;
+}
 
 .catalogue{
 
@@ -39,4 +41,9 @@ height: 0px;
 }
 .sec{
     margin-top: 100px;
+}
+@media screen and (max-width:467px) {
+    .ldd{
+        width: 300px;
+    }
 }

@@ -12,25 +12,32 @@ import {toast} from "react-toastify"
 function Navbar() {
   const [toolBar, setToolBar]  = useState(0);
   const [menuBar,setMenuBar]=useState(0);
+  const [st,setSt]=useState(false)
    const history=useHistory();
    const dispatch=useDispatch();
 
  const {status}=useSelector((state)=>({...state.user}));
-
-console.log(status);
-    const handleLogout=()=>{
-    dispatch(logOut({history,toast}));
+const user = localStorage.getItem("user")&& JSON.parse(localStorage.getItem("user"))
+const handleLogout=()=>{
+  dispatch(logOut({history,toast}));
+  setSt(false)
     }
-useEffect(()=>{
-  if(status){
-    console.log(status)
- 
-  }
-},[status])
+    useEffect(()=>{
+      
+          if(user!==null){
+            setSt(true)
+          }
 
-  const user = {
-    name:"Raghav"
-  }
+    },[])
+    useEffect(()=>{
+      if(status){
+        console.log(status)
+        
+      }
+      console.log(st)
+},[status,st])
+
+  
     var userOp = document.getElementById('user-op');
     var leftOp = document.getElementById('left-options');
     document.onclick = function(e){
@@ -107,8 +114,8 @@ useEffect(()=>{
     <div className="user">
         <img src={userimg} alt="user" className="user-img options"  onClick={()=>{showOption()}} />
        </div>
-       {status ?<div className="user-name" >
-        <h5 onClick={()=>{showOption()}} className="options">{user.name}</h5>
+       {status||st ?<div className="user-name" >
+        <h5 onClick={()=>{showOption()}} className="options">{user?.name}</h5>
        </div>:<h5 className='loginOp'><Link to ="/login"> Log In </Link></h5>}
     </div>
     </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './pricingcatalog.css'
 import { useHistory, useParams } from 'react-router-dom'
-const PricingCard = ({price,distance,id}) => {
+const PricingCard = ({price,distance,plan,id}) => {
 
    const history=useHistory();
     const handleClick=()=>{
@@ -14,7 +14,7 @@ const PricingCard = ({price,distance,id}) => {
   return (
     <>
        <div className="plan-2">
-            <h3>Pro Plan-8Hr</h3>
+            <h3>{plan}</h3>
             <h5>₹ {price} for 8 hours for {distance}km</h5>
             <div className="line"></div>
             <li>Experienced Drivers</li>

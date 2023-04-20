@@ -12,6 +12,9 @@ export const cardFetch=()=>{
 export const bookCabs=(formData)=>{
     return API.post('/bookcabs',formData);
 }
+export const userbooking=(formData)=>{
+    return API.post('/userbooking',formData);
+}
 export const sendQuerry=(formData)=>{
     return API.post('/querry',formData);
 }
@@ -24,3 +27,11 @@ export const confirmOtp=(formData)=>{
 export const updatePassword=(formData)=>{
     return API.post('/updatepassword',formData)
 }
+export const regOtp=(formData)=>{
+    return API.post('/regotp',formData)
+}
+export const payConti=async(formData)=>{
+    return await API.post('/checkout',formData)
+    
+}
+

@@ -25,6 +25,8 @@ const About = () => {
 
 The first step is quite easy to take but for second you need a genuine source to get information and as well to plan your trip. With innumerous tourist spots renowned across the world, it becomes really difficult for one to find the best among them. Now no more worries, as you can get all the solutions under one roof i.e. Dwivedi Tour&Travels.com, the other name for convenience in the domain of 24X7 online travel portals.
         </p>
+        </div>
+        <div className="user-card">
         <img src="https://ichef.bbci.co.uk/news/976/cpsprodpb/B7F6/production/_128049074_muskgetty.png" alt="" />
         <h3>Raghav Pandey</h3>  
         <h4>Developer</h4>
@@ -40,6 +42,8 @@ The first step is quite easy to take but for second you need a genuine source to
         Quaerat repudiandae amet eius optio autem explicabo natus reiciendis assumenda, recusandae facere molestias ut provident, tempore nihil nulla porro at qui perferendis! Id nobis consequatur in magni culpa totam dolore.
         Asperiores magnam itaque eaque error quaerat eius pariatur corrupti labore vero voluptatibus assumenda et voluptatum accusantium quos, possimus repudiandae debitis dolore aliquam? Quia incidunt aspernatur dolorum est nulla, porro explicabo!
         </p>
+        </div>
+        <div className="user-card">
         <img src="https://ichef.bbci.co.uk/news/976/cpsprodpb/B7F6/production/_128049074_muskgetty.png" alt="" />
         <h3>Vimal Mishra</h3>
         <h4>Developer</h4> 
@@ -55,8 +59,26 @@ The first step is quite easy to take but for second you need a genuine source to
         Quaerat repudiandae amet eius optio autem explicabo natus reiciendis assumenda, recusandae facere molestias ut provident, tempore nihil nulla porro at qui perferendis! Id nobis consequatur in magni culpa totam dolore.
         Asperiores magnam itaque eaque error quaerat eius pariatur corrupti labore vero voluptatibus assumenda et voluptatum accusantium quos, possimus repudiandae debitis dolore aliquam? Quia incidunt aspernatur dolorum est nulla, porro explicabo!
         </p>
-      </div>
       
+        </div>
+        <div className="user-card">
+        <img src="https://ichef.bbci.co.uk/news/976/cpsprodpb/B7F6/production/_128049074_muskgetty.png" alt="" />
+        <h3>Piyush</h3>
+        <h4>Developer</h4> 
+        <div className="socials">
+          <a href='https://www.google.com/' target="_blank">
+            <img src={insta} alt="" />
+            </a>
+            <a href='https://www.google.com/' target="_blank">
+            <img src={linkd} alt="" />
+            </a>
+         </div>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, veniam porro tenetur, inventore omnis tempore suscipit, quam hic et illo voluptatem! Odit a dolorum quisquam vel excepturi sunt dolorem? Ut?
+        Quaerat repudiandae amet eius optio autem explicabo natus reiciendis assumenda, recusandae facere molestias ut provident, tempore nihil nulla porro at qui perferendis! Id nobis consequatur in magni culpa totam dolore.
+        Asperiores magnam itaque eaque error quaerat eius pariatur corrupti labore vero voluptatibus assumenda et voluptatum accusantium quos, possimus repudiandae debitis dolore aliquam? Quia incidunt aspernatur dolorum est nulla, porro explicabo!
+        </p>
+      
+        </div>
        
     </div>
   )

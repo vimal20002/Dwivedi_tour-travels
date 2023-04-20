@@ -17,13 +17,16 @@
     justify-content: center;
     align-items: center;
     padding: 10px 20px;
-    background-color: rgba(248, 232, 232, 0.948);
+    background-color: rgba(249, 249, 249, 0.948);
+    border: 1px solid black;
     box-shadow: 8px 8px 10px 0px rgba(225, 207, 207, 0.918);
 }
 
 
 .plan-2:hover{
     box-shadow: 10px 10px 12px 0px rgba(120, 92, 205, 0.767);
+    transform: translateY(-5px);
+    transition: 0.5s;
 }
 
 .line{
