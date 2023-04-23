@@ -1,0 +1,58 @@
+.main-catalog{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 30px 50px;
+    column-gap: 100px;
+    justify-content: center;
+    align-items: center;
+    row-gap: 60px;
+}
+
+.prc{
+    padding: 10px;
+}
+.list{
+    margin-top: 50px;
+
+}
+ul{
+    list-style: none;
+}
+
+ul li::before{
+    content: "\2022";
+    color: red;
+    margin-right: 1em;
+    font-weight: bold;
+    width: 1em;
+}
+
+.patta{
+    background-color: #5271ff;
+    width: 250px;
+    border-radius: 10px;
+    margin: -10px;
+    text-align: center;
+    color: white;
+    font-weight:200;
+    letter-spacing: 1px;
+}
+
+.line{
+    width: 200px;
+    background-color: black;
+}
+.bookk-now{
+    border-radius: 45px;
+    margin-top: 20px;
+    background-color: #8482FF;
+    padding: 10px 20px;
+    color: white;
+    cursor: pointer;
+}
+
+.bookk-now:hover{
+    background-color:whitesmoke;
+    color:black;
+    box-shadow:4px 4px 6px 0px rgba(120, 92, 205, 0.767);
+}

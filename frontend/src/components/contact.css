@@ -27,3 +27,14 @@
     box-shadow: 5px 5px 7px 0px rgba(225, 207, 207, 0.918);
 
 }
+@media screen and (max-width:450px) {
+    .getInTouch{
+        margin: 0px;
+    }
+    .getInTouch input{
+        width: 300px;
+    }
+    .getInTouch textarea{
+        width: 300px;
+    }
+}

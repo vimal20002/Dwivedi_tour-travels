@@ -47,9 +47,18 @@
     width:100px;
     margin-left: 20px;
 }
+.err{
+    color: red;
+}
+
 @media screen and (max-width:450px) {
     .loginForm{
         padding: 10px;
+        margin: 98px 4px;
+    }
+    .loginForm input
+    {
+        width: 300px;
     }
     .registerForm{
         padding: 10px;

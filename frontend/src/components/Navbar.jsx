@@ -3,30 +3,43 @@ import logo from './images/logo.png'
 import userimg from './images/user.png'
 import "./navbar.css"
 import menu from './images/menu.png'
-import  {Link} from 'react-router-dom'
-import { useSelector } from 'react-redux'
-
+import  {Link, useHistory} from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { logOut } from '../redux/features/userSlice'
+import {toast} from "react-toastify"
 
 
 function Navbar() {
   const [toolBar, setToolBar]  = useState(0);
   const [menuBar,setMenuBar]=useState(0);
-
+  const [st,setSt]=useState(false)
+  const [name, setName]=useState("")
+   const history=useHistory();
+   const dispatch=useDispatch();
 
  const {status}=useSelector((state)=>({...state.user}));
+const puser = localStorage.getItem("user")
+const handleLogout=()=>{
+  dispatch(logOut({history,toast}));
+  setSt(false)
+    }
+    useEffect(()=>{
+      if(puser!==undefined){
+      const user = JSON.parse(puser)
+          if(user!==null){
+            setSt(true)
+            setName(user.name)
+          }
+        }
 
-console.log(status);
+    },[puser])
+    useEffect(()=>{
+      if(status){
+        console.log(status)
+      }
+},[status,st,name])
 
-useEffect(()=>{
-  if(status){
-    console.log(status)
- 
-  }
-},[status])
-
-  const user = {
-    name:"Raghav"
-  }
+  
     var userOp = document.getElementById('user-op');
     var leftOp = document.getElementById('left-options');
     document.onclick = function(e){
@@ -51,6 +64,7 @@ useEffect(()=>{
   
 
   const showOption = (e)=>{
+    if(status){
     if(toolBar % 2===0)
     document.getElementById('user-op').style.display = "flex"
     else
@@ -58,6 +72,7 @@ useEffect(()=>{
       document.getElementById('user-op').style.display = "none"
     }
     setToolBar(toolBar + 1);
+  }
   }
 
   const showMenuOption = (e)=>{
@@ -103,8 +118,8 @@ useEffect(()=>{
     <div className="user">
         <img src={userimg} alt="user" className="user-img options"  onClick={()=>{showOption()}} />
        </div>
-       {status ?<div className="user-name" >
-        <h5 onClick={()=>{showOption()}} className="options">{user.name}</h5>
+       {status||st ?<div className="user-name" >
+        <h5 onClick={()=>{showOption()}} className="options">{name}</h5>
        </div>:<h5 className='loginOp'><Link to ="/login"> Log In </Link></h5>}
     </div>
     </div>
@@ -120,7 +135,9 @@ useEffect(()=>{
         <Link to="/account">
         <li className='options'>Account</li>
         </Link>
-        <li className='options'>Log Out</li>
+        <li className='options'
+          onClick={()=>{handleLogout()}}
+        >Log Out</li>
       </ul>
     </div>
     </>
