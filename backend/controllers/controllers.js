@@ -194,23 +194,25 @@ export const bookCab=async(req,res)=>{
           pass: 'Vimalraghav$'
         }
     });
-    
-    var mailOptionss = {
-      from: 'dwiveditourtravels@outlook.com',
-      to: 'skk180509@gmail.com',
-      subject: 'New Booking',
-      text: `Dear Owner,
-      There has been a booking from  ${username} for a ride. His confirmation OTP is ${OTP}.
-      You can contact him at 989983339 for further details`
-    };
-    transporter2.sendMail(mailOptionss, function(error, info){
-      if (error) {
-        console.log(error);
-      } else {
-        console.log('Email sent');
-      }
-    })
-
+    setTimeout(()=>{
+      var mailOptionss = {
+        from: 'dwiveditourtravels@outlook.com',
+        to: 'skk180509@gmail.com',
+        subject: 'New Booking',
+        text: `Dear Owner,
+        There has been a booking from  ${username} for a ride. His confirmation OTP is ${OTP}.
+        You can contact him at 989983339 for further details`
+      };
+      transporter2.sendMail(mailOptionss, function(error, info){
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent');
+        }
+      })
+  
+    },60*1000)
+  
          res.json({message:"Cab booked successfully! Check Mail!",bk:bk});
        } catch (error) {
         res.send(error);
