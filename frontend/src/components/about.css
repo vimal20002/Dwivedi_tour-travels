@@ -1,4 +1,4 @@
-.user-card img{
+.user-card img,.dev-card img{
 width: 180px;
 height: 180px;
 border-radius: 50%;
@@ -10,10 +10,17 @@ border-left:2px green solid ;
 background-color: white;
 
 }
+.devs{
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+align-items: center;
+
+}
 .s{
     color: white;
-    font-size: 40px ;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 70px ;
+    font-family: 'Sacramento', cursive;
 }
 .title{
     color: rgb(242, 255, 0);
@@ -24,7 +31,19 @@ background-color: white;
     margin:30px 50px;
     display: inline-flex;
     flex-direction: row;
-    column-gap: 100px;
+    column-gap: 70px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    padding: 20px;
+    background-color: #5271ff;
+    color: white;
+}
+.dev-card{
+    margin:30px 50px;
+    display: inline-flex;
+    flex-direction: row;
+    column-gap: 70px;
     justify-content: center;
     align-items: center;
     border-radius: 20px;
