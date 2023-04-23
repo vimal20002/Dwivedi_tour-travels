@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import './booking.css'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
 import { toast } from "react-toastify"
 import { bookCabs } from '../redux/features/userSlice'
 import { payConti } from '../redux/api'
+import PricingCard from './PricingCard'
 
 const Booking = ({ plan }) => {
   const params = useParams();
@@ -105,9 +106,11 @@ const Booking = ({ plan }) => {
     const razor = new window.Razorpay(options);
     razor.open();
   }
+  const obj = JSON.parse(localStorage.getItem("plan"));
   return (
     <>
       <div className="car-form">
+      <PricingCard flag={false} price={obj?.price} hour={obj?.hour} distance={obj?.distance} plan={obj?.plan} id={obj?.id}   />
         <div id="frm">
         <input type="text" name='from' placeholder='Choose Pickup Location' autoFocus value={pickLoc} onChange={(e) => { setPickLoc(e.target.value) }} />
         <h3 className='h4-heading'>To</h3>

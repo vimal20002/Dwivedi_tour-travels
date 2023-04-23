@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './login.css'
 import jbrdstiimg from '../components/images/register.png'
 import { regOtp, register } from '../redux/features/userSlice'

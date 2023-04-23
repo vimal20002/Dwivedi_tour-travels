@@ -11,7 +11,6 @@ import Navbar from './components/Navbar';
 import Register from './components/Register';
 import {Switch,Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify'
-import Admin from './components/Admin';
 import GetEmail from './components/GetEmail';
 import Forgot from './components/Forgot';
 import PricingCatalog from './components/PricingCatalog';

@@ -67,8 +67,9 @@
     border-radius: 20px;
     padding: 40px 50px;
     margin: 0px 30px;
-    flex-direction: column;
-    row-gap: 10px;
+    flex-wrap: wrap;
+    row-gap: 30px;
+    column-gap: 100px;
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;

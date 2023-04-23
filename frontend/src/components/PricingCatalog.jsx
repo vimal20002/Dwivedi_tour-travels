@@ -29,7 +29,7 @@ const PricingCatalog = () => {
     <>
       <div className="main-catalog">
         { catalogData?.map((e)=>{
-           return <PricingCard price={e.price} hour={e.hour} distance={e.distance} plan={e.plan} id={e.id}   />  
+           return <PricingCard flag={true} price={e.price} hour={e.hour} distance={e.distance} plan={e.plan} id={e.id}   />  
          })
         }
       </div>

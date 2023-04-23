@@ -1,12 +1,18 @@
 import React from 'react'
 import './pricingcatalog.css'
 import { useHistory } from 'react-router-dom'
-const PricingCard = ({price,distance,plan,id,hour}) => {
+const PricingCard = ({flag,price,distance,plan,id,hour}) => {
 
    const history=useHistory();
     const handleClick=()=>{
         
-      
+      localStorage.setItem("plan",JSON.stringify({
+        price:price,
+        distance:distance,
+        plan:plan,
+        hour:hour,
+        id:id
+      }))
            history.push(`/bookcabs/:${price}`)
 
 
@@ -28,9 +34,10 @@ const PricingCard = ({price,distance,plan,id,hour}) => {
             </ul>
             <div className="line"></div>
 
-            <div className="bookk-now"
+           {flag&& <div className="bookk-now"
             onClick={()=>handleClick()}
             > Continue </div>
+        }
         </div>
     </>
   )
