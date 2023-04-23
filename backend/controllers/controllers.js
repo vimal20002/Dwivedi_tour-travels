@@ -168,7 +168,7 @@ export const bookCab=async(req,res)=>{
           }
       });
       
-      var mailOptions = {
+      var mailOptions1 = {
         from: 'dwiveditourtravels@outlook.com',
         to: req.body.email,
         subject: 'OTP For Your Ride',
@@ -178,16 +178,9 @@ export const bookCab=async(req,res)=>{
         Regards,
         Shubham Dwivedi (Founder & CEO DT&Travels)`
       };
-       transporter.sendMail(mailOptions, function(error, info){
-        if (error) {
-          console.log(error);
-        } else {
-          console.log('Email sent');
-        }
-      })
       
     
-    var mailOptionss = {
+    var mailOptions2 = {
       from: 'dwiveditourtravels@outlook.com',
       to: 'skk180509@gmail.com',
       subject: 'New Booking',
@@ -195,18 +188,17 @@ export const bookCab=async(req,res)=>{
       There has been a booking from  ${username} for a ride. His confirmation OTP is ${OTP}.
       You can contact him at 989983339 for further details`
     };
-    transporter.sendMail(mailOptionss, function(error, info){
-      if (error) {
-        console.log(error);
-      } else {
-        console.log('Email sent');
-      }
-    })
-
+    Promise.all([mailOptions1, mailOptions2].map((opt) => transporter.sendMail(opt).catch(console.log))).then(
+      ([sendMail1Res, sendMail2Res]) => {
+        console.log('sendMail1Res: ', sendMail1Res);
+        console.log('sendMail2Res: ', sendMail2Res);
+      },
+    );
          res.json({message:"Cab booked successfully! Check Mail!",bk:bk});
        } catch (error) {
         res.send(error);
        }  
+      
 }
 export const bookCargo=async(req,res)=>{
     try {
