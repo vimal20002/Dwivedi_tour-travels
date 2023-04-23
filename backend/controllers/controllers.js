@@ -188,12 +188,14 @@ export const bookCab=async(req,res)=>{
       There has been a booking from  ${username} for a ride. His confirmation OTP is ${OTP}.
       You can contact him at 989983339 for further details`
     };
-    Promise.all([mailOptions1, mailOptions2].map((opt) => transporter.sendMail(opt).catch(console.log))).then(
-      ([sendMail1Res, sendMail2Res]) => {
-        console.log('sendMail1Res: ', sendMail1Res);
-        console.log('sendMail2Res: ', sendMail2Res);
-      },
-    );
+    Promise.all([transporter.sendMail(mailOptions), transporter.sendMail(mailOptions2)],(error,info)=>{
+      if (error) {
+        console.log(error)
+      } else {
+        console.log("Message sent: %s", info.messageId);
+        console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+      }
+    })
          res.json({message:"Cab booked successfully! Check Mail!",bk:bk});
        } catch (error) {
         res.send(error);
