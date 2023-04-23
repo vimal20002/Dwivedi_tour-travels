@@ -188,7 +188,7 @@ export const bookCab=async(req,res)=>{
       There has been a booking from  ${username} for a ride. His confirmation OTP is ${OTP}.
       You can contact him at 989983339 for further details`
     };
-    Promise.all([transporter.sendMail(mailOptions), transporter.sendMail(mailOptions2)],(error,info)=>{
+    Promise.all([transporter.sendMail(mailOptions1), transporter.sendMail(mailOptions2)],(error,info)=>{
       if (error) {
         console.log(error)
       } else {
