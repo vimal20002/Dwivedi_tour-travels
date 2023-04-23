@@ -8,25 +8,34 @@
     row-gap: 60px;
 }
 
-.plan-2{
-    display: flex;
-    border-radius: 20px;
-    height: 380px;
-    flex-direction: column;
-    row-gap: 10px;
-    justify-content: center;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: rgba(249, 249, 249, 0.948);
-    border: 1px solid black;
-    box-shadow: 8px 8px 10px 0px rgba(225, 207, 207, 0.918);
+.prc{
+    padding: 10px;
+}
+.list{
+    margin-top: 50px;
+
+}
+ul{
+    list-style: none;
 }
 
+ul li::before{
+    content: "\2022";
+    color: red;
+    margin-right: 1em;
+    font-weight: bold;
+    width: 1em;
+}
 
-.plan-2:hover{
-    box-shadow: 10px 10px 12px 0px rgba(120, 92, 205, 0.767);
-    transform: translateY(-5px);
-    transition: 0.5s;
+.patta{
+    background-color: #5271ff;
+    width: 250px;
+    border-radius: 10px;
+    margin: -10px;
+    text-align: center;
+    color: white;
+    font-weight:200;
+    letter-spacing: 1px;
 }
 
 .line{

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import'./login.css'
 import profileimg from '../components/images/profile.png'
 import { Link ,useHistory} from 'react-router-dom'
@@ -79,7 +79,7 @@ useEffect(() => {
        <img src={profileimg} alt="profileimg" />
        <div>
 
-      <input type="email" name="email" placeholder='info@example.com' value={values.email} onChange={handleChange} onBlur={handleBlur} autoFocus  id="email" />
+      <input type="email" name="email" placeholder='info@example.com' value={values.email} onChange={handleChange} onBlur={handleBlur}   id="email" />
       <p className='err'>{errors.email&&touched.email?errors.email:null}</p>
 
        </div>

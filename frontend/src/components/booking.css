@@ -50,9 +50,19 @@
      font-family: 'Tilt-Neon',sans-serif;
      margin-top: 10px;
 }
-.car-form,#frm{
-    background-color: whitesmoke;
-    box-shadow: 5px 5px 7px 0px rgba(225, 207, 207, 0.918);
+#frm{
+    display: flex;
+    border-radius: 20px;
+    padding: 40px 50px;
+    margin: 0px 30px;
+    flex-direction: column;
+    row-gap: 5px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    box-shadow: 2px 2px 7px #5271ff;  
+}
+.car-form{
     display: flex;
     border-radius: 20px;
     padding: 40px 50px;
@@ -65,27 +75,35 @@
 }
 
 input{
-    background-color: whitesmoke;
-    border-radius: 3px;
+    background-color: #8da2ff11;
+    border-radius: 8px;
      outline: none;
     width:300px;
     /* height:40px; */
-    padding: 6px;
-    font-size: 20px;
-    font-family: 'Times New Roman', Times, serif;
+    padding: 12px;
+    border: 1px solid #5271ff;
+    font-size: 15px;
     font-weight: 500;
-    color:rgb(25, 33, 255);
+    color:black;
+    letter-spacing: 1px;
 }
 input::placeholder{
-    color:rgb(25, 33, 255);
+    color:rgba(50, 50, 50, 0.726);
+}
+input:focus{
+    border: 2px solid #52ffa6;
+}
+textarea:focus{
+    border: 2px solid #52ffa6;
 }
 textarea{
-    background-color: whitesmoke;
-    box-shadow: 2px 2px 3px 0px rgba(120, 92, 205, 0.767);
+    letter-spacing: 1px;
+    /* background-color: blue; */
     border: 2px solid rgba(49, 0, 0, 0.871);
     border-radius: 5px;
      outline: none;
     width:300px;
+    border: 1px solid #5271ff;
     padding: 10px;
     font-size: 20px;
     font-family: 'Times New Roman', Times, serif;
@@ -93,7 +111,7 @@ textarea{
     color:rgb(25, 33, 255);
 }
 textarea::placeholder{
-    color:rgb(25, 33, 255);
+    color:rgba(50, 50, 50, 0.726);
 }
 .book-btn{
     background-color:rgba(132, 119, 255, 0.823) ;

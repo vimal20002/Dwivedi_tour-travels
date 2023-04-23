@@ -219,8 +219,7 @@ const userSlice = createSlice({
         },
         [cardFetch.fulfilled]:(state, action)=>{
             state.loading=false;
-            localStorage.setItem("cards",JSON.stringify(action.payload));
-            state.tour = action.payload?.data;
+            state.tour = action.payload;
         },
         [bookCabs.pending]:(state, action)=>{
             state.loading=true;
@@ -240,7 +239,6 @@ const userSlice = createSlice({
         [userbooking.fulfilled]:(state, action)=>{
             state.loading=false;
             state.booking=action.payload;
-            localStorage.setItem("booking",JSON.stringify(action.payload))
         },
         [userbooking.rejected]:(state, action)=>{
             state.loading=false;

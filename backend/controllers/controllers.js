@@ -521,6 +521,6 @@ export const paymentverification =async(req, res)=>{
    const bk=await Bookingmodal.findOne({pid:req.body.razorpay_order_id});
    bk.paid = true;
    await bk.save();
-      res.redirect("https://dwiveditourtravels.netlify.app/");
+      res.redirect("https://dwiveditourstravels.netlify.app/");
   }
 }

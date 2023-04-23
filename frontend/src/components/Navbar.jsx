@@ -13,29 +13,31 @@ function Navbar() {
   const [toolBar, setToolBar]  = useState(0);
   const [menuBar,setMenuBar]=useState(0);
   const [st,setSt]=useState(false)
+  const [name, setName]=useState("")
    const history=useHistory();
    const dispatch=useDispatch();
 
  const {status}=useSelector((state)=>({...state.user}));
-const user = localStorage.getItem("user")&& JSON.parse(localStorage.getItem("user"))
+const puser = localStorage.getItem("user")
 const handleLogout=()=>{
   dispatch(logOut({history,toast}));
   setSt(false)
     }
     useEffect(()=>{
-      
+      if(puser!==undefined){
+      const user = JSON.parse(puser)
           if(user!==null){
             setSt(true)
+            setName(user.name)
           }
+        }
 
-    },[])
+    },[puser])
     useEffect(()=>{
       if(status){
         console.log(status)
-        
       }
-      console.log(st)
-},[status,st])
+},[status,st,name])
 
   
     var userOp = document.getElementById('user-op');
@@ -62,6 +64,7 @@ const handleLogout=()=>{
   
 
   const showOption = (e)=>{
+    if(status){
     if(toolBar % 2===0)
     document.getElementById('user-op').style.display = "flex"
     else
@@ -69,6 +72,7 @@ const handleLogout=()=>{
       document.getElementById('user-op').style.display = "none"
     }
     setToolBar(toolBar + 1);
+  }
   }
 
   const showMenuOption = (e)=>{
@@ -115,7 +119,7 @@ const handleLogout=()=>{
         <img src={userimg} alt="user" className="user-img options"  onClick={()=>{showOption()}} />
        </div>
        {status||st ?<div className="user-name" >
-        <h5 onClick={()=>{showOption()}} className="options">{user?.name}</h5>
+        <h5 onClick={()=>{showOption()}} className="options">{name}</h5>
        </div>:<h5 className='loginOp'><Link to ="/login"> Log In </Link></h5>}
     </div>
     </div>

@@ -13,11 +13,13 @@ const Register = () => {
     name:"",
     email:"",
     password:"",
+    phone:"",
     cpassword:"",
   }
   const formSchema = Yup.object({
     name:Yup.string().min(3,"Minimum 3 characters are required").max(25," Should not more than 25 char").required("Name is madantory feild"),
     email:Yup.string().email().required("Email is madantory feild"),
+    phone:Yup.string().min(10,'Phone number must be 10 digit').max(10,'Phone number must be 10 digit').required("Phone  is madantory feild"),
     password:Yup.string().min(6).required("Password is madantory feild"),
     cpassword:Yup.string().required("Confirm password is madantory feild").min(6).oneOf([Yup.ref("password"), null], "Password must match"),
     otp:Yup.string().required("Otp is required feild")
@@ -34,12 +36,13 @@ const Register = () => {
 
    const dispatch=useDispatch();
    const history=useHistory();
-  const getOtp=({name,email,password,cpassword})=>{
+  const getOtp=({name,email,password,cpassword,phone})=>{
      console.log("h")
     const formData={
       name:name,
       email:email,
       password:password,
+      phone:phone,
     }
 if(password===cpassword){
         console.log(formData)
@@ -71,6 +74,10 @@ const handleSubmitt = ({email,otp})=>{
           <div>
         <input type="email" name="email"   placeholder='info@example.com'  value={values.email} onChange={handleChange} onBlur={handleBlur} id="email" />
         <p className='err' >{errors.email&&touched.email?errors.email:null}</p>
+          </div>
+          <div>
+        <input type="number" name="phone"   placeholder='9999999999'  value={values.phone} onChange={handleChange} onBlur={handleBlur} id="phone" />
+        <p className='err' >{errors.phone&&touched.phone?errors.phone:null}</p>
           </div>
           <div>
         <input type="password" name="password"  placeholder='Password'  id="password" value={values.password} onChange={handleChange} onBlur={handleBlur} />

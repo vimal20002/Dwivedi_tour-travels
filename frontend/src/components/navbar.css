@@ -9,9 +9,12 @@
     overflow: hidden;
     flex-direction: row;
     column-gap: 20px;
-    background-color:whitesmoke;
+    background-color: white;
     height:80px;
-    box-shadow: 5px 5px 7px 0px rgba(225, 207, 207, 0.918);
+    box-shadow: 3px 3px 7px 0px #8da1ffab;
+}
+*{
+    font-family: 'Poppins', sans-serif;
 }
 .nav-options{
     display: flex;
@@ -35,10 +38,8 @@
 .menu-icon:hover{
     filter: invert(50%);
 }
-.btn :hover{
-
-    color : blue;
-    scale: 1.20;
+.btn h5:hover{
+    color : #5271ff;
     transition: 0.4s all;
 }
 .btn{
@@ -123,8 +124,8 @@
     color: white;
     font-family: 'Tilt Neon', cursive;
     position: relative;
-  
-    /* margin-top: 50px; */
+ 
+    bottom: 0px;
     width: 100%;
     padding: 10px;
     text-align: center;

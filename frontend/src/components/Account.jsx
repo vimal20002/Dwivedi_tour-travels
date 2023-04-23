@@ -14,13 +14,14 @@ const Account = () => {
     const getBooking=()=>{
       console.log(accountInfo)
       dispatch(userbooking({email:accountInfo?.email}))
-      const pastbookings=localStorage.getItem("booking")!==undefined?JSON.parse(localStorage.getItem("booking")):null;
-      setDt(pastbookings)
     }
     useEffect(()=>{
       setDt(booking)
 
-    },[data,booking])
+    },[booking])
+    useEffect(()=>{
+
+    },[data])
     const {status}=useSelector((state)=>({...state.user}));
     useEffect(()=>{
       if(accountInfo===null &&status===false)
@@ -44,7 +45,7 @@ const Account = () => {
         </div>
         </div>  
         <div className="book-btn" onClick={getBooking}>Load Bookings</div>
-        {loading?<img src={lod}/>:
+        {loading?<img src={lod} alt='lod'/>:
         <div className="recent-bookings">
             <h4>Recent Bookings</h4>
             {
