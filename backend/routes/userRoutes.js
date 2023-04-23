@@ -1,5 +1,5 @@
 import express from "express"
-import { logIn, register, querry, googleLogin, bookCab, bookCargo, uploadImage, upldateInfo, genOtp, confirmOtp, updatePassword, addTour, getTour, getBookings, delBooking, updateTour, adminLogin, getQuerry, deltour, confirmOtpSignup, payFun, paymentverification, getuserBooking } from "../controllers/controllers.js";
+import { logIn, register, querry, googleLogin, bookCab, bookCargo, uploadImage, upldateInfo, genOtp, confirmOtp, updatePassword, addTour, getTour, getBookings, delBooking, updateTour, adminLogin, getQuerry, deltour, confirmOtpSignup, payFun, paymentverification, getuserBooking, delreview } from "../controllers/controllers.js";
 const userRoute = express.Router();
 userRoute.post('/register',register);
 userRoute.post('/regotp',confirmOtpSignup);
