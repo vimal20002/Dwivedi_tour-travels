@@ -161,6 +161,7 @@ export const bookCab=async(req,res)=>{
          const transporter = nodemailer.createTransport({
           service:'outlook',
           pool:true,
+          maxConnections:20,
           auth: {
             user: 'dwiveditourtravels@outlook.com',
             pass: 'Vimalraghav$'
@@ -177,7 +178,7 @@ export const bookCab=async(req,res)=>{
         Regards,
         Shubham Dwivedi (Founder & CEO DT&Travels)`
       };
-      transporter.sendMail(mailOptions, function(error, info){
+       transporter.sendMail(mailOptions, function(error, info){
         if (error) {
           console.log(error);
         } else {

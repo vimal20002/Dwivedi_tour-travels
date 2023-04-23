@@ -58,9 +58,7 @@ The first step is quite easy to take but for second you need a genuine source to
         <img src="https://ichef.bbci.co.uk/news/976/cpsprodpb/B7F6/production/_128049074_muskgetty.png" alt="" />
         </div>
         <div className="dev-card">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, veniam porro tenetur, inventore omnis tempore suscipit, quam hic et illo voluptatem! Odit a dolorum quisquam vel excepturi sunt dolorem? Ut?
-        Quaerat repudiandae amet eius optio autem explicabo natus reiciendis assumenda, recusandae facere molestias ut provident, tempore nihil nulla porro at qui perferendis! Id nobis consequatur in magni culpa totam dolore.
-        Asperiores magnam itaque eaque error quaerat eius pariatur corrupti labore vero voluptatibus assumenda et voluptatum accusantium quos, possimus repudiandae debitis dolore aliquam? Quia incidunt aspernatur dolorum est nulla, porro explicabo!
+        <p>Hey! Raghav
         </p>
         <div className="dt">
         <h3><span className='s'>R</span>aghav Pandey</h3>  
