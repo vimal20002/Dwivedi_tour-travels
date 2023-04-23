@@ -224,7 +224,6 @@ export const upldateInfo=async(req,res)=>{
   } 
  }
  export const addTour=async(req,res)=>{
-   console.log(req.body)
   const admin = await UserModal.findOne({email:"shubham@admin.com"})
   if(admin.token===req.body.token){
       const tour=await tourModal.findOne({title:req.body.title});
@@ -239,7 +238,7 @@ export const upldateInfo=async(req,res)=>{
        }
     }
     else{
-      res.json({message:"You are not a admin"})
+      res.json({message:"You are not an admin"})
     }
     
  }
@@ -254,7 +253,6 @@ export const upldateInfo=async(req,res)=>{
  
 
 export const getBookings = async(req,res)=>{
-  console.log(req.body)
   const admin = await UserModal.findOne({email:"shubham@admin.com"})
     if(admin?.token===req.body.token){
       const bookings = await adminModal.find( {});
@@ -262,7 +260,7 @@ export const getBookings = async(req,res)=>{
       res.json(bookings)
     }
     else{
-      res.json({message:"You are not a admin"})
+      res.json({message:"You are not an admin"})
     }
 }
 
@@ -274,7 +272,7 @@ export const delBooking = async(req, res)=>{
       res.json(data)
     }
     else{
-      res.json({message:"You are not a admin"})
+      res.json({message:"You are not an admin"})
     }
   
  }
@@ -288,7 +286,24 @@ export const deltour=async(req,res)=>{
   res.json(data);
     }
     else{
-      res.json({message:"You are not a admin"})
+      res.json({message:"You are not an admin"})
+    }
+  } catch (error) {
+    console.log(error)
+  }
+
+}
+export const delreview=async(req,res)=>{
+  console.log(req.body)
+  try {
+    const admin = await UserModal.findOne({email:"shubham@admin.com"})
+    if(admin.token===req.body.token){
+      await querryModal.deleteOne({_id:req.body._id})
+  const data = await querryModal.find({});
+  res.json(data);
+    }
+    else{
+      res.json({message:"You are not an admin"})
     }
   } catch (error) {
     console.log(error)
@@ -304,7 +319,7 @@ export const updateTour = async(req,res)=>{
     res.json(data);
     }
     else{
-      res.json({message:"You are not a admin"})
+      res.json({message:"You are not an admin"})
     }
   } catch (error) {
     console.log(error)
@@ -325,9 +340,23 @@ try {
   res.json({token:token})
   }
   else{
-    res.json({message:"You are not a admin"})
+    res.json({message:"You are not an admin"})
   }
 } catch (error) {
   console.log(error.message)
 }
+}
+export const getQuerry = async(req,res)=>{
+  try {
+    const admin = await UserModal.findOne({email:"shubham@admin.com"})
+    if(admin?.token===req.body.token){
+    const data = await querryModal.find({})
+    res.json(data);
+    }
+    else{
+      res.json({message:"You are not an admin"})
+    }
+  } catch (error) {
+    console.log(error)
+  }
 }
