@@ -146,6 +146,7 @@ export const bookCab=async(req,res)=>{
             date:req.body.date,
             time:req.body.time,
             price:req.body.price,
+            type:"Cab"
          }
    
         const bk=new Bookingmodal(nbooking)
@@ -174,6 +175,7 @@ export const bookCab=async(req,res)=>{
         subject: 'OTP For Your Ride',
         text: `Dear Customer,   
    Your Cab Has Been Booked Succefully.Please Share The Given OTP  ${OTP}  With Our Driver To Start Your Ride. Happey Journey ! 
+   for any issue contact to 8318891285
 
         Regards,
         Shubham Dwivedi (Founder & CEO DT&Travels)`
@@ -197,11 +199,11 @@ export const bookCab=async(req,res)=>{
     setTimeout(()=>{
       var mailOptionss = {
         from: 'dwiveditourtravels@outlook.com',
-        to: 'skk180509@gmail.com',
+        to: 'dwiveditourstravelsofficials@gmail.com',
         subject: 'New Booking',
         text: `Dear Owner,
         There has been a booking from  ${username} for a ride. His confirmation OTP is ${OTP}.
-        You can contact him at 989983339 for further details`
+        You can contact him at ${req.body.phone} for further details`
       };
       transporter2.sendMail(mailOptionss, function(error, info){
         if (error) {
@@ -225,31 +227,96 @@ export const bookCab=async(req,res)=>{
       );
 }
 export const bookCargo=async(req,res)=>{
-    try {
-      const user=await UserModal.findOne({email:req.body.email});
-      const nbooking={
-         vehicle:req.body.vehicle,
-         phone:req.body.phone,
-         pickLoc:req.body.pickLoc,
-         dest:req.body.dest,
-         date:req.body.date,
-         time:req.body.time,
-         feed:req.body.feed
+  try {
+    console.log(req.body);
+     const user=await UserModal.findOne({email:req.body.email});
+     const username=user.name;
+     const nbooking={
+      name:username,
+      email:req.body.email,
+        pickLoc:req.body.pickLoc,
+        dest:req.body.dest,
+        date:req.body.date,
+        time:req.body.time,
+        price:req.body.price,
+        type:"Cargo"
+     }
+
+    const bk=new Bookingmodal(nbooking)
+    await bk.save()
+     var digits = '0123456789';
+     let OTP = '';
+     for (let i = 0; i < 4; i++ ) {
+         OTP += digits[Math.floor(Math.random() * 10)];
+     }
+
+
+
+     const transporter1 = nodemailer.createTransport({
+      service:'outlook',
+      pool:true,
+      maxConnections:20,
+      auth: {
+        user: 'dwiveditourtravels@outlook.com',
+        pass: 'Vimalraghav$'
       }
-      console.log(nbooking);
-      const arr = user.bookings;
-      arr.push(nbooking)
-      user.bookings = arr;
-      console.log(user);
-      await user.save();
-      console.log(user);
-      const admininfo= new adminModal({bookings:req.body});
-      await admininfo.save();
-      console.log(admininfo)
-      res.json({message:"Cargo booked successfully!"});
-    } catch (error) {
-     res.send(error);
+  });
+  
+  var mailOptions = {
+    from: 'dwiveditourtravels@outlook.com',
+    to: req.body.email,
+    subject: 'OTP For Your Ride',
+    text: `Dear Customer,   
+           Your Cargo Has Been Booked Succefully.Please Share The Given OTP  ${OTP}  With Our Driver To Start Your Ride. Happey Journey ! 
+           for any issue contact to 8318891285
+    Regards,
+    Shubham Dwivedi (Founder & CEO DT&Travels)`
+  };
+   transporter1.sendMail(mailOptions, function(error, info){
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent');
     }
+  })
+  const transporter2 = nodemailer.createTransport({
+    service:'outlook',
+    pool:true,
+    maxConnections:20,
+    auth: {
+      user: 'dwiveditourtravels@outlook.com',
+      pass: 'Vimalraghav$'
+    }
+});
+setTimeout(()=>{
+  var mailOptionss = {
+    from: 'dwiveditourtravels@outlook.com',
+    to: 'dwiveditourstravelsofficials@gmail.com',
+    subject: 'New Booking',
+    text: `Dear Owner,
+    There has been a booking from  ${username} for a ride. His confirmation OTP is ${OTP}.
+    You can contact him at ${req.body.phone} for further details`
+  };
+  transporter2.sendMail(mailOptionss, function(error, info){
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent');
+    }
+  })
+
+},60*1000)
+
+     res.json({message:"Cargo booked successfully! Check Mail!",bk:bk});
+   } catch (error) {
+    res.send(error);
+   }  
+   Promise.all([mailOptions1, mailOptions2].map((opt) => transporter.sendMail(opt).catch(console.log))).then(
+    ([sendMail1Res, sendMail2Res]) => {
+      console.log('sendMail1Res: ', sendMail1Res);
+      console.log('sendMail2Res: ', sendMail2Res);
+    },
+  );
 }
 export const querry = async(req, res)=>{
 const nquerry = new querryModal({querry:req.body});
@@ -468,7 +535,7 @@ try {
   const token = uuidv4();
   const date = new Date()
   console.log(date.getMonth())
-  const pass = date.getUTCDate().toString()+(date.getMonth()+1).toString()+date.getFullYear().toString();
+  const pass =date.toLocaleDateString();
   if(pass===req.body.password){
   admin.token=token;
   await admin.save();

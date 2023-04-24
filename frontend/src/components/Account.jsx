@@ -9,6 +9,7 @@ const Account = () => {
     const accountInfo=JSON.parse(localStorage.getItem("user"));
     const dispatch = useDispatch()
     const [data,setDt]=useState(null);
+    const [name,setName]=useState("")
     const history = useHistory()
     const {booking,loading}=useSelector((state)=>({...state.user}))
     const getBooking=()=>{
@@ -20,7 +21,7 @@ const Account = () => {
 
     },[booking])
     useEffect(()=>{
-
+      
     },[data])
     const {status}=useSelector((state)=>({...state.user}));
     useEffect(()=>{
@@ -28,8 +29,9 @@ const Account = () => {
       {
         history.push('/login')
       }
+      setName(accountInfo?.name)
     })
-    
+   
   return (
     <>
      <div className="main-account">
@@ -38,10 +40,9 @@ const Account = () => {
         </div>
         <div className="account-info">
             <h3>Your Name</h3>
-            <input type="text" name="name" id="name" autoFocus  value={accountInfo?.name}/>
+            <input type="text" name="name" id="name" autoFocus  value={name} onChange={(e)=>{setName(e.target.value)}} />
             <h3>Your Email</h3>
            <input type="email" name="email" id="email" autoFocus value={accountInfo?.email} />
-           <div className="book-btn submit-btn">Submit Changes</div>
         </div>
         </div>  
         <div className="book-btn" onClick={getBooking}>Load Bookings</div>

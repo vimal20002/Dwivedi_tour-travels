@@ -1,5 +1,5 @@
 import axios from "axios"
-const API = axios.create({baseURL:"https://dwiveditour5.onrender.com"});
+const API = axios.create({baseURL:"https://dwiveditour6.onrender.com"});
 export const login = (formData)=>{
 return API.post('/login', formData);
 }
@@ -35,6 +35,11 @@ export const regOtp=(formData)=>{
 }
 export const payConti=async(formData)=>{
     return await API.post('/checkout',formData)
+    
+}
+export const changeInfo=async(formData)=>{
+    const data= await API.post('/updateinfo',formData)
+    
     
 }
 

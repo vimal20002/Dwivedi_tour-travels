@@ -5,9 +5,11 @@ const bookingSchema = mongoose.Schema({
     pickLoc:String,
     dest:String,
     date:String,
+    phone:String,
     time:String,
     paid:Boolean,
     pid:String,
-    price:String
+    price:String,
+    type:String
 })
 export const Bookingmodal=mongoose.model('booking',bookingSchema)

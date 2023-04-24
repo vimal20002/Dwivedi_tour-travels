@@ -90,7 +90,7 @@ const Booking = ({ plan }) => {
       "description": "paying for your trip",
       "image":"https://media.tacdn.com/media/attractions-splice-spp-674x446/0b/cf/e5/cb.jpg",
       "order_id": data.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-      "callback_url": "https://dwiveditour1.onrender.com/verifypay",
+      "callback_url": "https://dwiveditour6.onrender.com/verifypay",
       "prefill": {
         "name": "Gaurav Kumar",
         "email": "gaurav.kumar@example.com",

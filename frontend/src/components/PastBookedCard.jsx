@@ -3,8 +3,6 @@ import './account.css'
 import { payConti } from '../redux/api'
 const PastBookedCard = ({destination,date,price,bid,paid}) => {
   const handlePay=async()=>{
-    const bid = JSON.parse(localStorage.getItem("bid"))
-    console.log(bid)
     const {data}= await payConti({amount:price,
       _id:bid
     });
@@ -19,7 +17,7 @@ const PastBookedCard = ({destination,date,price,bid,paid}) => {
       "description": "paying for your trip",
       "image":"https://media.tacdn.com/media/attractions-splice-spp-674x446/0b/cf/e5/cb.jpg",
       "order_id": data.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-      "callback_url": "http://localhost:8000/verifypay",
+      "callback_url": "https://dwiveditour6.onrender.com/verifypay",
       "prefill": {
         "name": "Gaurav Kumar",
         "email": "gaurav.kumar@example.com",
