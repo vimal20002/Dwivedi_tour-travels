@@ -535,15 +535,14 @@ export const getQuerry = async(req,res)=>{
     console.log(error)
   }
 }
-const secret = process.env.RAZOR_SECRET
-const key = process.env.RAZOR_KEY
+
 export const payFun =async(req, res)=>{
   console.log(req.body)
     try {
         console.log(req.body.amount)
          const instance = new Razorpay({
-            key_id: key,
-            key_secret: secret,
+            key_id: "rzp_test_hnhwpr4PlYB0mw",
+            key_secret: "Nub46Ml99qlMjqR5lgyWuMRu",
           });
           const options = {
             amount: Number(req.body.amount*100), // amount in the smallest currency unit
@@ -568,7 +567,6 @@ export const paymentverification =async(req, res)=>{
   var expectedSignature = crypto.createHmac('sha256', secret)
                                   .update(body.toString())
                                   .digest('hex');
-  var response = {"signatureIsValid":"false"}
   if(expectedSignature === req.body.razorpay_signature){
    const py= new Payement(req.body)
    console.log(py)
