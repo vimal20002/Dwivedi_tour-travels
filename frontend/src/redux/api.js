@@ -1,5 +1,5 @@
 import axios from "axios"
-const API = axios.create({baseURL:"https://dwiveditour6.onrender.com"});
+const API = axios.create({baseURL:"http://localhost:8000"});
 export const login = (formData)=>{
 return API.post('/login', formData);
 }

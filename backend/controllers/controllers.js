@@ -36,13 +36,13 @@ export const register = async (req, res) => {
           service:'outlook',
           pool:true,
           auth: {
-            user: 'dwiveditourtravels@outlook.com',
+            user: process.env.SMTP_USER,
             pass: 'Vimalraghav$'
           }
       });
       
       var mailOptions = {
-        from: 'dwiveditourtravels@outlook.com',
+        from: process.env.SMTP_USER,
         to: req.body.email,
         subject: 'OTP For Your Email confirmation',
         text: `Dear Customer,\n
@@ -57,7 +57,7 @@ export const register = async (req, res) => {
           console.log('Email sent');
         }
       })
-            res.json({message:"Otp sent Successfully"});
+            res.json({message:"Otp sent Successfully check mail(Check spam section also)!"});
         }
 
     } catch (error) {
@@ -164,13 +164,13 @@ export const bookCab=async(req,res)=>{
           pool:true,
           maxConnections:20,
           auth: {
-            user: 'dwiveditourtravels@outlook.com',
-            pass: 'Vimalraghav$'
+            user: process.env.SMTP_USER,
+            pass: process.env.EMAIL_PASS,
           }
       });
       
       var mailOptions = {
-        from: 'dwiveditourtravels@outlook.com',
+        from: process.env.SMTP_USER,
         to: req.body.email,
         subject: 'OTP For Your Ride',
         text: `Dear Customer,   
@@ -192,14 +192,14 @@ export const bookCab=async(req,res)=>{
         pool:true,
         maxConnections:20,
         auth: {
-          user: 'dwiveditourtravels@outlook.com',
-          pass: 'Vimalraghav$'
+          user: process.env.SMTP_USER,
+          pass: process.env.EMAIL_PASS,
         }
     });
     setTimeout(()=>{
       var mailOptionss = {
-        from: 'dwiveditourtravels@outlook.com',
-        to: 'dwiveditourstravelsofficials@gmail.com',
+        from: process.env.SMTP_USER,
+        to: process.env.OWNER_EMAIL,
         subject: 'New Booking',
         text: `Dear Owner,
         There has been a booking from  ${username} for a ride. His confirmation OTP is ${OTP}.
@@ -215,7 +215,7 @@ export const bookCab=async(req,res)=>{
   
     },60*1000)
   
-         res.json({message:"Cab booked successfully! Check Mail!",bk:bk});
+         res.json({message:"Cab booked successfully! Check Mail(Check spam section also)!",bk:bk});
        } catch (error) {
         res.send(error);
        }  
@@ -257,13 +257,13 @@ export const bookCargo=async(req,res)=>{
       pool:true,
       maxConnections:20,
       auth: {
-        user: 'dwiveditourtravels@outlook.com',
-        pass: 'Vimalraghav$'
+        user: process.env.SMTP_USER,
+        pass: process.env.EMAIL_PASS,
       }
   });
   
   var mailOptions = {
-    from: 'dwiveditourtravels@outlook.com',
+    from: process.env.SMTP_USER,
     to: req.body.email,
     subject: 'OTP For Your Ride',
     text: `Dear Customer,   
@@ -284,14 +284,14 @@ export const bookCargo=async(req,res)=>{
     pool:true,
     maxConnections:20,
     auth: {
-      user: 'dwiveditourtravels@outlook.com',
-      pass: 'Vimalraghav$'
+      user: process.env.SMTP_USER,
+      pass: process.env.EMAIL_PASS,
     }
 });
 setTimeout(()=>{
   var mailOptionss = {
-    from: 'dwiveditourtravels@outlook.com',
-    to: 'dwiveditourstravelsofficials@gmail.com',
+    from: process.env.SMTP_USER,
+    to: process.env.OWNER_EMAIL,
     subject: 'New Booking',
     text: `Dear Owner,
     There has been a booking from  ${username} for a ride. His confirmation OTP is ${OTP}.
@@ -307,7 +307,7 @@ setTimeout(()=>{
 
 },60*1000)
 
-     res.json({message:"Cargo booked successfully! Check Mail!",bk:bk});
+     res.json({message:"Cargo booked successfully! Check Mail(Check spam section also)!",bk:bk});
    } catch (error) {
     res.send(error);
    }  
@@ -366,13 +366,13 @@ export const upldateInfo=async(req,res)=>{
       const transporter = nodemailer.createTransport({
         service:'outlook',
         auth: {
-          user: 'dwiveditourtravels@outlook.com',
-          pass: 'Vimalraghav$'
+          user: process.env.SMTP_USER,
+          pass: process.env.EMAIL_PASS,
         }
     });
     
     var mailOptions = {
-      from: 'dwiveditourtravels@outlook.com',
+      from: process.env.SMTP_USER,
       to: req.body.email,
       subject: 'Verification for OTP of Dwivedi Tour&Travels',
       text: 'Your Otp for verification is '+OTP
@@ -383,7 +383,7 @@ export const upldateInfo=async(req,res)=>{
       } else {
         console.log('Email sent');
       }
-      res.json({message:"Otp sent successfully"})
+      res.json({message:"Otp sent successfully check mail (Check spam section also)!"})
     });
    }
    } catch (error) {
@@ -426,8 +426,7 @@ export const upldateInfo=async(req,res)=>{
   } 
  }
  export const addTour=async(req,res)=>{
-  const admin = await UserModal.findOne({email:"shubham@admin.com"})
-  if(admin.token===req.body.token){
+  
       const tour=await tourModal.findOne({title:req.body.title});
       if(tour===null){
           const ntour=new tourModal({...req.body});
@@ -439,11 +438,9 @@ export const upldateInfo=async(req,res)=>{
         res.json({message:"Tour already exists"})
        }
     }
-    else{
-      res.json({message:"You are not an admin"})
-    }
     
- }
+    
+ 
 
  export const getTour = async(req, res)=>{
   try {
@@ -456,41 +453,28 @@ export const upldateInfo=async(req,res)=>{
  }
  
  export const getBookings = async(req,res)=>{
-  const admin = await UserModal.findOne({email:"shubham@admin.com"})
-    if(admin?.token===req.body.token){
+  
       const bookings = await Bookingmodal.find( {});
       console.log(bookings)
       res.json(bookings)
-    }
-    else{
-      res.json({message:"You are not an admin"})
-    }
+    
 }
 
 export const delBooking = async(req, res)=>{
-  const admin = await UserModal.findOne({email:"shubham@admin.com"})
-    if(admin?.token===req.body.token){
+
       await Bookingmodal.deleteOne({_id:req.body._id})
       const data = await Bookingmodal.find({});
       res.json(data)
-    }
-    else{
-      res.json({message:"You are not an admin"})
-    }
+   
   
  }
 export const deltour=async(req,res)=>{
   try {
-    const admin = await UserModal.findOne({email:"shubham@admin.com"})
-    if(admin.token===req.body.token){
-      console.log("hey")
+   
       await tourModal.deleteOne({_id:req.body._id})
   const data = await tourModal.find({});
   res.json(data);
-    }
-    else{
-      res.json({message:"You are not an admin"})
-    }
+   
   } catch (error) {
     console.log(error)
   }
@@ -499,15 +483,11 @@ export const deltour=async(req,res)=>{
 export const delreview=async(req,res)=>{
   console.log(req.body)
   try {
-    const admin = await UserModal.findOne({email:"shubham@admin.com"})
-    if(admin.token===req.body.token){
+  
       await querryModal.deleteOne({_id:req.body._id})
   const data = await querryModal.find({});
   res.json(data);
-    }
-    else{
-      res.json({message:"You are not an admin"})
-    }
+    
   } catch (error) {
     console.log(error)
   }
@@ -515,15 +495,10 @@ export const delreview=async(req,res)=>{
 }
 export const updateTour = async(req,res)=>{
   try {
-    const admin = await UserModal.findOne({email:"shubham@admin.com"})
-    if(admin?.token===req.body.token){
     await tourModal.updateOne({_id:req.body._id},{...req.body})
     const data = await tourModal.find({});
     res.json(data);
-    }
-    else{
-      res.json({message:"You are not an admin"})
-    }
+    
   } catch (error) {
     console.log(error)
   }
@@ -534,7 +509,7 @@ try {
   const admin = await UserModal.findOne({email:req.body.email})
   const token = uuidv4();
   const date = new Date()
-  console.log(date.getMonth())
+  console.log(date.toLocaleDateString())
   const pass =date.toLocaleDateString();
   if(pass===req.body.password){
   admin.token=token;
@@ -551,20 +526,15 @@ try {
 }
 export const getQuerry = async(req,res)=>{
   try {
-    const admin = await UserModal.findOne({email:"shubham@admin.com"})
-    if(admin?.token===req.body.token){
+   
     const data = await querryModal.find({})
     res.json(data);
-    }
-    else{
-      res.json({message:"You are not an admin"})
-    }
   } catch (error) {
     console.log(error)
   }
 }
-const secret = "Nub46Ml99qlMjqR5lgyWuMRu"
-const key = "rzp_test_hnhwpr4PlYB0mw"
+const secret = process.env.RAZOR_SECRET
+const key = process.env.RAZOR_KEY
 export const payFun =async(req, res)=>{
   console.log(req.body)
     try {
@@ -604,6 +574,6 @@ export const paymentverification =async(req, res)=>{
    const bk=await Bookingmodal.findOne({pid:req.body.razorpay_order_id});
    bk.paid = true;
    await bk.save();
-      res.redirect("https://dwiveditourstravels.netlify.app/");
+      res.redirect("https://dwiveditourstravels.com");
   }
 }

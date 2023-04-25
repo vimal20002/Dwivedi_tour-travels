@@ -1,6 +1,21 @@
 import express from "express"
 import { logIn, register, querry, googleLogin, bookCab, bookCargo, uploadImage, upldateInfo, genOtp, confirmOtp, updatePassword, addTour, getTour, getBookings, delBooking, updateTour, adminLogin, getQuerry, deltour, confirmOtpSignup, payFun, paymentverification, getuserBooking, delreview } from "../controllers/controllers.js";
+import { UserModal } from "../modals/userSchema.js";
 const userRoute = express.Router();
+
+//midleware
+const adminValidate=async(req,res,next)=>{
+    const admin = await UserModal.findOne({email:process.env.ADMIN_EMAIL})
+    console.log("hey")
+    if(admin?.token===req.body.token){
+        next()
+    }
+    else{
+        res.json({message:"You are not an admin"})
+    }
+}
+
+//user
 userRoute.post('/register',register);
 userRoute.post('/regotp',confirmOtpSignup);
 userRoute.post('/login',logIn);
@@ -13,21 +28,23 @@ userRoute.post('/updateinfo',upldateInfo);
 userRoute.post('/genotp',genOtp);
 userRoute.post('/confirmotp',confirmOtp);
 userRoute.post('/updatepassword',updatePassword);
-userRoute.post('/addtour',addTour);
+userRoute.post('/userbooking',getuserBooking)
+
+//admin
+userRoute.post('/addtour',adminValidate,addTour);
 userRoute.get('/gettour',getTour);
-userRoute.post('/deltour',deltour);
-userRoute.post('/delreview',delreview);
-userRoute.post('/delbooking',delBooking);
-
-userRoute.post('/getbookings',getBookings);
-
-userRoute.patch('/updatetour',updateTour)
+userRoute.post('/deltour',adminValidate,deltour);
+userRoute.post('/delreview',adminValidate,delreview);
+userRoute.post('/delbooking',adminValidate,delBooking);
+userRoute.post('/getbookings',adminValidate,getBookings);
+userRoute.patch('/updatetour',adminValidate,updateTour)
 userRoute.post('/adminlogin',adminLogin)
-userRoute.post('/getquerry',getQuerry)
+userRoute.post('/getquerry',adminValidate,getQuerry)
+
+//payement
 userRoute.post('/checkout',payFun)
 userRoute.post('/verifypay',paymentverification)
 
 
-userRoute.post('/userbooking',getuserBooking)
 
 export default userRoute
