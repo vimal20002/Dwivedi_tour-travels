@@ -219,12 +219,7 @@ export const bookCab=async(req,res)=>{
        } catch (error) {
         res.send(error);
        }  
-       Promise.all([mailOptions1, mailOptions2].map((opt) => transporter.sendMail(opt).catch(console.log))).then(
-        ([sendMail1Res, sendMail2Res]) => {
-          console.log('sendMail1Res: ', sendMail1Res);
-          console.log('sendMail2Res: ', sendMail2Res);
-        },
-      );
+      
 }
 export const bookCargo=async(req,res)=>{
   try {
@@ -311,12 +306,8 @@ setTimeout(()=>{
    } catch (error) {
     res.send(error);
    }  
-   Promise.all([mailOptions1, mailOptions2].map((opt) => transporter.sendMail(opt).catch(console.log))).then(
-    ([sendMail1Res, sendMail2Res]) => {
-      console.log('sendMail1Res: ', sendMail1Res);
-      console.log('sendMail2Res: ', sendMail2Res);
-    },
-  );
+  
+ 
 }
 export const querry = async(req, res)=>{
 const nquerry = new querryModal({querry:req.body});
