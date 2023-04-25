@@ -11,5 +11,6 @@ otp:String,
 type:String,
 valid:Boolean,
 pid:String,
+gender:String
 })
 export const UserModal = mongoose.model("userData",userSchema);
