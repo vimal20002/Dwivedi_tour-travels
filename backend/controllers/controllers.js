@@ -69,7 +69,7 @@ export const register = async (req, res) => {
 setTimeout(async()=>{
   const users = await UserModal.find({});
   users?.map(async(e)=>{
-    if(e.valid===false)
+    if(e?.valid===false)
     {
       await UserModal.deleteOne({email:e.email});
     }
