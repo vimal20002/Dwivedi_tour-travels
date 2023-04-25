@@ -27,8 +27,8 @@ export const register = async (req, res) => {
               OTP += digits[Math.floor(Math.random() * 10)];
             }
             const nuser = new UserModal({ ...req.body, password: hpass,otp:OTP });
+            nuser.valid=false;
             console.log(nuser)
-            user.valid=false;
             await nuser.save();
 
 
