@@ -82,12 +82,12 @@ try {
   const user = await UserModal.findOne({email:req.body.email})
   if(user?.otp===req.body.otp)
   {
-    user?.valid =true;
+    user.valid =true;
     await user.save();
     res.json({message:"Verified successfully"})
   }
   else{
-    user?.valid =false;
+    user.valid =false;
     await user.save();
     res.json({message:"Invalid Otp"})
   }
