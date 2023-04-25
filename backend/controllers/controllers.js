@@ -28,6 +28,7 @@ export const register = async (req, res) => {
             }
             const nuser = new UserModal({ ...req.body, password: hpass,otp:OTP });
             console.log(nuser)
+            user.valid=false;
             await nuser.save();
 
 
@@ -37,7 +38,7 @@ export const register = async (req, res) => {
           pool:true,
           auth: {
             user: process.env.SMTP_USER,
-            pass: 'Vimalraghav$'
+            pass: process.env.EMAIL_PASS
           }
       });
       
@@ -65,6 +66,16 @@ export const register = async (req, res) => {
     }
 
 }
+setTimeout(async()=>{
+  const users = await UserModal.find({});
+  users?.map(async(e)=>{
+    if(e.valid===false)
+    {
+      await UserModal.deleteOne({email:e.email});
+    }
+  })
+
+},60*1000)
 export const confirmOtpSignup=async(req,res)=>{
   console.log(req.body)
 try {
