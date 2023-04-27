@@ -157,6 +157,7 @@ export const bookCab=async(req,res)=>{
             date:req.body.date,
             time:req.body.time,
             price:req.body.price,
+            phone:req.body.phone,
             type:"Cab"
          }
    
