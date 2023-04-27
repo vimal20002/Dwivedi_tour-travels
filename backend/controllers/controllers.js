@@ -246,6 +246,7 @@ export const bookCargo=async(req,res)=>{
         date:req.body.date,
         time:req.body.time,
         price:req.body.price,
+        phone:req.body.phone,
         type:"Cargo"
      }
 
