@@ -6,11 +6,9 @@ import * as api from '../api'
 export const login = createAsyncThunk("auth/login",async({formData, history,toast})=>{
     try {
         const res = await api.login(formData);
-        console.log(res);
         if(res.data._id){
         toast.success("LogIn Successfull")
         history.push("/");
-        console.log(res.data)
         return res.data;
         }
         else{
@@ -27,7 +25,6 @@ export const glogin = createAsyncThunk("auth/glogin",async({formData, history,to
         if(res.data._id){
         toast.success("LogIn Successfull")
         history.push("/");
-        console.log(res.data)
         return res.data;
         }
         else{
@@ -38,11 +35,18 @@ export const glogin = createAsyncThunk("auth/glogin",async({formData, history,to
         toast.error(error.message);
     }
 })
-export const register=createAsyncThunk("auth/register",async({formData,toast})=>{
+export const register=createAsyncThunk("auth/register",async({formData,toast},)=>{
     try {
         const response=await api.register(formData);
+        console.log(response)
+        if(response?.data?.message){
         toast.success(response.data.message);
-        return;
+        return response.data;
+        }
+        else{
+            toast.error(response.data)
+            return;
+        }
     } catch (error) {
         console.log(error)
         toast.error(error.message)
@@ -120,7 +124,6 @@ export const logOut=createAsyncThunk("logout",async({history,toast})=>{
 export const genOtp=createAsyncThunk("genOtp",async({formData,toast})=>{
     try {
         const response =await api.genOtp(formData);
-        console.log(response);
         if(response.data.message){
             toast.success(response.data.message);
             
@@ -160,7 +163,6 @@ export const updatePassword=createAsyncThunk("updatepassword",async({formData,hi
     }
 })
 export const userbooking=createAsyncThunk("userbooking",async(formData)=>{
-    console.log(formData)
     try {
         const response=await api.userbooking(formData);
         return response.data;
@@ -190,9 +192,8 @@ const userSlice = createSlice({
         [login.fulfilled]:(state, action)=>{
             state.loading=false;
             state.status=true;
-            console.log(action.payload);
             localStorage.setItem("user",JSON.stringify(action.payload));
-            state.user = action.payload.data;
+            state.user = action.payload;
         },
         [login.rejected]:(state, action)=>{
             state.loading=false;
@@ -205,9 +206,8 @@ const userSlice = createSlice({
         [glogin.fulfilled]:(state, action)=>{
             state.loading=false;
             state.status=true;
-            console.log(action.payload);
             localStorage.setItem("user",JSON.stringify(action.payload));
-            state.user = action.payload.data;
+            state.user = action.payload;
         },
         [glogin.rejected]:(state, action)=>{
             state.loading=false;

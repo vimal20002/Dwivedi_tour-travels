@@ -1,15 +1,12 @@
 .loginForm{
     display: flex;
     flex-direction: column;
-    row-gap: 20px;
-    
+    row-gap: 4px;
     justify-content: center;
     align-items: center;
-    margin: 98px 30px;
+    margin: 18px 30px;
     padding: 20px;
-    background-color: whitesmoke;
     border-radius: 20px;
-    box-shadow: 5px 5px 7px 0px rgba(225, 207, 207, 0.918); 
 }
 .loginForm img{
     height: 150px;
@@ -29,15 +26,13 @@
 .registerForm{
     display: flex;
     flex-direction: column;
-    row-gap: 20px;
+    row-gap: 4px;
  
     justify-content: center;
     align-items: center;
-    margin: 98px 30px;
+    margin: 18px 30px;
     padding: 20px;
-    background-color: whitesmoke;
     border-radius: 20px;
-    box-shadow: 5px 5px 7px 0px rgba(225, 207, 207, 0.918); 
 }
 .registerForm input{
     width:250px;
@@ -50,6 +45,16 @@
 .err{
     color: red;
 }
+.gen-op{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    column-gap: 0px;
+    width: 300px;
+    color: #5271ff;
+}
+
 
 @media screen and (max-width:450px) {
     .loginForm{

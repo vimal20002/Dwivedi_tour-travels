@@ -24,22 +24,23 @@ const Contact = () => {
   }
   return (
     <>
+    <div className="mnc">
     <div className="main-contact">
         <h2>Main Office</h2>
-        <p>C - 81C, Sector - 8,
-Noida - 201301, UP, India</p>
-<h4>Telephone</h4>
-<p>8299622672</p>
+        <p>1045, Nearby Rotary Public School, Sector-22, Gurugram,
+Gurugram, Haryana, 122015</p>
+
 <h4>Phone</h4>
-<p>9517300355</p>
+<p>8318891285</p>
 <h4>Email</h4>
-<p>skk180509@gmial.com</p>
+<p>dwiveditourstravelsofficials@gmail.com</p>
     </div>
     <div className="getInTouch">
         <h2>Get In Touch</h2>
-        <input type="email" name="email" id="email" placeholder='info@example.com' autoFocus value={email} onChange={(e)=>{setEmail(e.target.value)}}/>
-        <textarea name="querry" id="qurry" cols="30" rows="4" placeholder='Write Your Query Here' autoFocus value={querry} onChange ={(e)=>{setQuerry(e.target.value)}}></textarea>
+        <input type="email" name="email" id="email" placeholder='info@example.com'  value={email} onChange={(e)=>{setEmail(e.target.value)}}/>
+        <textarea name="querry" id="qurry" cols="30" rows="4" placeholder='Write Your Query Here'  value={querry} onChange ={(e)=>{setQuerry(e.target.value)}}></textarea>
         <div className="book-btn"  onClick={()=>{submitForm()}}>Submit</div>
+    </div>
     </div>
     </>
   )

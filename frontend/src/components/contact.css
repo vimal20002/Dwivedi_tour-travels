@@ -4,27 +4,31 @@
     row-gap: 5px;
     justify-content: center;
     align-items: center;
-    background-color: whitesmoke;
-    margin: 30px 50px;
     padding: 20px;
     border-radius: 20px;
-    box-shadow: 5px 5px 7px 0px rgba(225, 207, 207, 0.918);
+    background-color: #5271ff;
+    color: white;
 
 }
-.main-contact p{
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+.mnc{
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 20px;
+    column-gap: 20px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
 }
+
 .getInTouch{
     display: flex;
     flex-direction: column;
     row-gap: 10px;
     justify-content: center;
     align-items: center;
-    background-color: whitesmoke;
     padding: 20px;
     margin: 30px 50px;
     border-radius: 20px;
-    box-shadow: 5px 5px 7px 0px rgba(225, 207, 207, 0.918);
 
 }
 @media screen and (max-width:450px) {

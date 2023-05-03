@@ -12,7 +12,6 @@ const Account = () => {
     const history = useHistory()
     const {booking,loading}=useSelector((state)=>({...state.user}))
     const getBooking=()=>{
-      console.log(accountInfo)
       dispatch(userbooking({email:accountInfo?.email}))
     }
     useEffect(()=>{
@@ -38,10 +37,9 @@ const Account = () => {
         </div>
         <div className="account-info">
             <h3>Your Name</h3>
-            <input type="text" name="name" id="name" autoFocus  value={accountInfo?.name}/>
+            <input type="text" name="name" id="name"   value={accountInfo?.name}/>
             <h3>Your Email</h3>
-           <input type="email" name="email" id="email" autoFocus value={accountInfo?.email} />
-           <div className="book-btn submit-btn">Submit Changes</div>
+           <input type="email" name="email" id="email"  value={accountInfo?.email} />
         </div>
         </div>  
         <div className="book-btn" onClick={getBooking}>Load Bookings</div>
@@ -50,7 +48,6 @@ const Account = () => {
             <h4>Recent Bookings</h4>
             {
                 data?.map((e)=>{
-                  console.log(e)
                     return <PastBookedCard destination={e.dest} date={e.date} price={e.price} bid={e._id} paid={e.paid} />
                 })
             }

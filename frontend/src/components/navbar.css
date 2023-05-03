@@ -112,12 +112,14 @@
     display: none;
     margin-top: -1000px;
     position: absolute;
-    cursor: pointer;
     animation-name: leftOptionsOpening;
     animation-duration: 0.4s;
     z-index: 100;
 
 
+}
+.l-options{
+    cursor: pointer;
 }
 .footer{
     background-color: black;
@@ -160,10 +162,13 @@
         text-align: center;
         /* border:1px solid black; */
         border-radius: 10px;
-        background-color: rgb(245, 245, 245);
-        box-shadow: 6px 6px 8px 0px rgba(225, 207, 207, 0.918);
+        background-color:white;
+        box-shadow: 2px 2px 4px 0px rgba(225, 207, 207, 0.918);
        flex-direction: column;
       
+    }
+    #frm{
+padding: 10px;
     }
    .nav-options{
     display: none;

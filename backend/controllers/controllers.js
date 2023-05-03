@@ -14,7 +14,7 @@ export const register = async (req, res) => {
         let user = await UserModal.findOne({ email: req.body.email })
         // console.log(user)
         if (user !== null) {
-            res.send("User Already Exists");
+            res.json({message:"User Already Exists"});
         }
         else {
             const salt = await bcrypt.genSalt(10)

@@ -3,14 +3,11 @@ import './account.css'
 import { payConti } from '../redux/api'
 const PastBookedCard = ({destination,date,price,bid,paid}) => {
   const handlePay=async()=>{
-    const bid = JSON.parse(localStorage.getItem("bid"))
-    console.log(bid)
     const {data}= await payConti({amount:price,
       _id:bid
     });
-    console.log(data)
 
-    const key = "rzp_test_hnhwpr4PlYB0mw"
+    const key = process.env.REACT_APP_RAZOR_KEY
     const options = {
       "key": key, // Enter the Key ID generated from the Dashboard
       "amount": data.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
@@ -19,14 +16,9 @@ const PastBookedCard = ({destination,date,price,bid,paid}) => {
       "description": "paying for your trip",
       "image":"https://media.tacdn.com/media/attractions-splice-spp-674x446/0b/cf/e5/cb.jpg",
       "order_id": data.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-      "callback_url": "http://localhost:8000/verifypay",
-      "prefill": {
-        "name": "Gaurav Kumar",
-        "email": "gaurav.kumar@example.com",
-        "contact": "9000090000"
-      },
+      "callback_url": process.env.REACT_APP_CALLBACK_URL,
       "notes": {
-        "address": "Razorpay Corporate Office"
+        "address": "1045, Nearby Rotary Public School, Sector-22, Gurugram,Gurugram, Haryana, 122015"
       },
       "theme": {
         "color": "#121212 "

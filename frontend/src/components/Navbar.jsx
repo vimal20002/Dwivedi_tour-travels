@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import logo from './images/logo.png'
 import userimg from './images/user.png'
+import girl from './images/girl.png'
 import "./navbar.css"
 import menu from './images/menu.png'
 import  {Link, useHistory} from 'react-router-dom'
@@ -8,36 +9,50 @@ import { useDispatch, useSelector } from 'react-redux'
 import { logOut } from '../redux/features/userSlice'
 import {toast} from "react-toastify"
 
-
 function Navbar() {
   const [toolBar, setToolBar]  = useState(0);
   const [menuBar,setMenuBar]=useState(0);
   const [st,setSt]=useState(false)
   const [name, setName]=useState("")
    const history=useHistory();
+   const [us,setUs]=useState()
    const dispatch=useDispatch();
 
- const {status}=useSelector((state)=>({...state.user}));
-const puser = localStorage.getItem("user")
+ const {status,user}=useSelector((state)=>({...state.user}));
+ const [clickLogout,setClicklogout]=useState(false);
+const puser = localStorage.getItem("user");
 const handleLogout=()=>{
   dispatch(logOut({history,toast}));
+  document.getElementById('user-op').style.display = "none"
   setSt(false)
+  setClicklogout(false);
     }
+
     useEffect(()=>{
-      if(puser!==undefined){
-      const user = JSON.parse(puser)
-          if(user!==null){
+      if(puser!=="undefined"){
+        if(localStorage.getItem("user")!==null){
+        const user = JSON.parse(puser)
+          if(user!==undefined){
             setSt(true)
-            setName(user.name)
+            setUs(user)
+            setClicklogout(true);
+            setName(user?.name)
+          }
           }
         }
-
+// eslint-disable-next-line
     },[puser])
     useEffect(()=>{
-      if(status){
-        console.log(status)
+      if(user!==null){
+        setSt(true)
+        setClicklogout(true);
+        setName(user?.name)
+        setUs(user)
       }
-},[status,st,name])
+      // eslint-disable-next-line
+    },[user])
+  
+
 
   
     var userOp = document.getElementById('user-op');
@@ -64,7 +79,7 @@ const handleLogout=()=>{
   
 
   const showOption = (e)=>{
-    if(status){
+     if(st || status){
     if(toolBar % 2===0)
     document.getElementById('user-op').style.display = "flex"
     else
@@ -72,7 +87,7 @@ const handleLogout=()=>{
       document.getElementById('user-op').style.display = "none"
     }
     setToolBar(toolBar + 1);
-  }
+     }
   }
 
   const showMenuOption = (e)=>{
@@ -83,12 +98,10 @@ const handleLogout=()=>{
       document.getElementById('left-options').style.display = "none"
     }
     setMenuBar(menuBar + 1);
-    console.log(document.getElementById('left-options'))
-    console.log(menuBar);
   }
 
 
-
+useEffect(()=>{},[us])
 
 
 
@@ -116,15 +129,16 @@ const handleLogout=()=>{
     
     <div className="right-op" >
     <div className="user">
-        <img src={userimg} alt="user" className="user-img options"  onClick={()=>{showOption()}} />
+        {us?.gender==="male"?<img src={userimg} alt="user" className="user-img options"  onClick={()=>{showOption()}} />:""}
+        {us?.gender==="female"?<img src={girl} alt="user" className="user-img options"  onClick={()=>{showOption()}} />:""}
        </div>
-       {status||st ?<div className="user-name" >
+       {(status || st) && clickLogout ?<div className="user-name" >
         <h5 onClick={()=>{showOption()}} className="options">{name}</h5>
        </div>:<h5 className='loginOp'><Link to ="/login"> Log In </Link></h5>}
     </div>
     </div>
     <div className="left-options l-options" id='left-options'>
-      <div className="btn nav-home l-options"><Link to="/"><h5 className='l-options'>Home</h5></Link></div>
+      <div className="btn nav-home l-options"><h5 className='l-options'><Link to="/">Home</Link></h5></div>
       <div className="btn nav-bookings l-options"><Link to="/bookcabs"><h5 className='l-options'>Book Cabs</h5></Link></div>
        <div className="btn nav-cargo l-options"><Link to="/cargo"><h5 className='l-options'>Cargo</h5></Link></div>
        <div className="btn nav-about l-options"><Link to="/about"><h5 className='l-options'>About</h5></Link></div>
@@ -145,5 +159,3 @@ const handleLogout=()=>{
 }
 
 export default Navbar
-
-

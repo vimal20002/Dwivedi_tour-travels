@@ -1,14 +1,24 @@
-import { Link } from 'react-router-dom';
 import './about.css'
 import insta from './images/instagram.png';
 import linkd from './images/linkedin.png'
 import { useState } from 'react';
 import ceo from "./images/ceo.png"
+import vim from "./images/vim.jpg"
+import rag from "./images/ragh.jpg"
+import piyu from "./images/piyu.jpg"
 
 const About = () => {
-  const [devs,setDevs] = useState(true)
+  const [devs,setDevs] = useState(false)
   return (
     <div className='main-about'>
+      <div className="op">
+        <div className={`aop ${devs?"":"act"}` } onClick={()=>{
+          setDevs(!devs)
+        }}>Compony</div>
+        <div className={`aop ${devs?"act":""}`} onClick={()=>{
+          setDevs(!devs)
+        }}>Developer</div>
+      </div>
      {!devs&& <div className="compony">
           <div className="user-card">
           <p>
@@ -22,10 +32,10 @@ The first step is quite easy to take but for second you need a genuine source to
          hubham Dwivedi</h3>
          <h4>Founder & CEO</h4>
          <div className="socials">
-          <a href='https://www.google.com/' target="_blank">
+          <a href='https://instagram.com/shubham.kumar.1865?igshid=YmMyMTA2M2Y=' rel="noreferrer" target="_blank">
             <img src={insta} alt="" />
             </a>
-            <a href='https://www.google.com/' target="_blank">
+            <a href="tel:8318891285">
             <img src={linkd} alt="" />
             </a>
          </div>
@@ -37,66 +47,31 @@ The first step is quite easy to take but for second you need a genuine source to
         </div>
         </div>}
         {devs&&<div className="devs">
-        <div className="dev-card">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, veniam porro tenetur, inventore omnis tempore suscipit, quam hic et illo voluptatem! Odit a dolorum quisquam vel excepturi sunt dolorem? Ut?
-        Quaerat repudiandae amet eius optio autem explicabo natus reiciendis assumenda, recusandae facere molestias ut provident, tempore nihil nulla porro at qui perferendis! Id nobis consequatur in magni culpa totam dolore.
-        Asperiores magnam itaque eaque error quaerat eius pariatur corrupti labore vero voluptatibus assumenda et voluptatum accusantium quos, possimus repudiandae debitis dolore aliquam? Quia incidunt aspernatur dolorum est nulla, porro explicabo!
-        </p>
-        <div className="dt">
-        <h3><span className='s'>V</span>imal Mishra</h3>  
-        <h4>Developer</h4>
-        <div className="socials">
-          <a href='https://www.google.com/' target="_blank">
-            <img src={insta} alt="" />
-            </a>
-            <a href='https://www.google.com/' target="_blank">
-            <img src={linkd} alt="" />
-            </a>
-         </div>
-         </div>
-       
-        <img src="https://ichef.bbci.co.uk/news/976/cpsprodpb/B7F6/production/_128049074_muskgetty.png" alt="" />
+          <h3>Boring Strings</h3>
+        <div className="imgs">
+          <div className="devimg">
+          <a href="https://www.linkedin.com/in/piyush-kumar-webdev">
+
+          <img src={piyu} alt="" className="p" />
+          </a>
+          <h4>Piyush</h4>
+          </div>
+          <div className="devimg">
+
+          <a href="https://www.linkedin.com/in/vimal-mishra9517/">
+          <img src={vim} alt="" className="v" />
+          </a>
+          <h4>Vimal</h4>
+          </div>
+          <div className="devimg">
+
+          <a href="https://www.linkedin.com/in/raghav-pandey-a39745200/">
+          <img src={rag} alt="" className="r" />
+          </a>
+          <h4>Raghav</h4>
+          </div>
         </div>
-        <div className="dev-card">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, veniam porro tenetur, inventore omnis tempore suscipit, quam hic et illo voluptatem! Odit a dolorum quisquam vel excepturi sunt dolorem? Ut?
-        Quaerat repudiandae amet eius optio autem explicabo natus reiciendis assumenda, recusandae facere molestias ut provident, tempore nihil nulla porro at qui perferendis! Id nobis consequatur in magni culpa totam dolore.
-        Asperiores magnam itaque eaque error quaerat eius pariatur corrupti labore vero voluptatibus assumenda et voluptatum accusantium quos, possimus repudiandae debitis dolore aliquam? Quia incidunt aspernatur dolorum est nulla, porro explicabo!
-        </p>
-        <div className="dt">
-        <h3><span className='s'>R</span>aghav Pandey</h3>  
-        <h4>Developer</h4>
-        <div className="socials">
-          <a href='https://www.google.com/' target="_blank">
-            <img src={insta} alt="" />
-            </a>
-            <a href='https://www.google.com/' target="_blank">
-            <img src={linkd} alt="" />
-            </a>
-         </div>
-         </div>
-       
-        <img src="https://ichef.bbci.co.uk/news/976/cpsprodpb/B7F6/production/_128049074_muskgetty.png" alt="" />
-        </div>
-        <div className="dev-card">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, veniam porro tenetur, inventore omnis tempore suscipit, quam hic et illo voluptatem! Odit a dolorum quisquam vel excepturi sunt dolorem? Ut?
-        Quaerat repudiandae amet eius optio autem explicabo natus reiciendis assumenda, recusandae facere molestias ut provident, tempore nihil nulla porro at qui perferendis! Id nobis consequatur in magni culpa totam dolore.
-        Asperiores magnam itaque eaque error quaerat eius pariatur corrupti labore vero voluptatibus assumenda et voluptatum accusantium quos, possimus repudiandae debitis dolore aliquam? Quia incidunt aspernatur dolorum est nulla, porro explicabo!
-        </p>
-        <div className="dt">
-        <h3><span className='s'>P</span>iyush</h3>  
-        <h4>Developer</h4>
-        <div className="socials">
-          <a href='https://www.google.com/' target="_blank">
-            <img src={insta} alt="" />
-            </a>
-            <a href='https://www.google.com/' target="_blank">
-            <img src={linkd} alt="" />
-            </a>
-         </div>
-         </div>
-       
-        <img src="https://ichef.bbci.co.uk/news/976/cpsprodpb/B7F6/production/_128049074_muskgetty.png" alt="" />
-        </div>
+        <p>Hey ! We're a group of three friends who love to learn new technologies through building. The best way to get good at it is to do it. We have developed several projects like this earlier. You can contact us through our socials given here for any kind of tech-related work. The next project is yours. We hope to see your works and querries dropping by at our socials. Have a good-day!</p>
         </div>
        }
     </div>

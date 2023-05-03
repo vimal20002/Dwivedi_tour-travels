@@ -38,28 +38,25 @@ const LogIn = () => {
         email:email,
         password:password
        }
-       console.log(formData);
        if(formData.email && formData.password){
        dispatch(login({formData, history,toast}));
 
        }
    }
    const onSuccess = (resp) => {
-    console.log(resp)
-    const nm = resp.profileObj.familyName;
-    const em = resp.profileObj.email;
-    console.log(nm, em);
+  console.log(resp)
     const formData={
       email:resp.profileObj.email,
       name:resp.profileObj.familyName,
-      googleId:resp.profileObj.googleId
+      googleId:resp.profileObj.googleId,
+      imageUrl:resp.profileObj.imageUrl
     }
     dispatch(glogin({formData,history,toast}))
   }
   const onFailure = (err) => {
     console.log(err)
   }
-const clientId ="812307903370-tdcjgn3a0ti8uhjofajr5jtnms384753.apps.googleusercontent.com"
+const clientId =process.env.REACT_APP_CLIENT_ID
 useEffect(() => {
   const initClient = () => {
     gapi.client.init({
@@ -67,7 +64,6 @@ useEffect(() => {
       scope: ''
     });
   };
-  // console.log(initClient)
   gapi.load('client:auth2', initClient);
 });
 
@@ -101,7 +97,7 @@ useEffect(() => {
           onSuccess={onSuccess}
           onFailure={onFailure}
           cookiePolicy={'single_host_origin'}
-          redirectUri='https://dwiveditourstravels.netlify.app/'
+          redirectUri='https://dwiveditourstravels.com/'
         />
      </div>
      </div>

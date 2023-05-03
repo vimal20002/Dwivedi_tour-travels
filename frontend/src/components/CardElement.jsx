@@ -1,6 +1,7 @@
 import React from 'react'
 import './cardelement.css'
 import { Link } from 'react-router-dom'
+import linkd from './images/linkedin.png'
 
 
 const CardElement = ({title,imgUrl,price,id}) => {
@@ -15,8 +16,9 @@ const CardElement = ({title,imgUrl,price,id}) => {
         <h2 className='card-title'>{title}</h2>
         <div className="payment-sec">
           <div className="pricing-sec">
-          <h2>Price</h2>
-          <h3> ₹{price}</h3> 
+            <a href="tel:8318891285">
+          <img src={linkd} alt="phone" id='ph'/>
+          </a>
           </div>
          <Link to={`/bookcabs/:${id}`}> <div className="book-now" >
              Book Now

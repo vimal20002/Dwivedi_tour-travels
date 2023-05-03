@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './login.css'
 import jbrdstiimg from '../components/images/register.png'
 import { regOtp, register } from '../redux/features/userSlice'
@@ -13,13 +13,12 @@ const Register = () => {
     name:"",
     email:"",
     password:"",
-    phone:"",
     cpassword:"",
   }
+  const [gen,setGen]=useState(true)
   const formSchema = Yup.object({
     name:Yup.string().min(3,"Minimum 3 characters are required").max(25," Should not more than 25 char").required("Name is madantory feild"),
     email:Yup.string().email().required("Email is madantory feild"),
-    phone:Yup.string().min(10,'Phone number must be 10 digit').max(10,'Phone number must be 10 digit').required("Phone  is madantory feild"),
     password:Yup.string().min(6).required("Password is madantory feild"),
     cpassword:Yup.string().required("Confirm password is madantory feild").min(6).oneOf([Yup.ref("password"), null], "Password must match"),
     otp:Yup.string().required("Otp is required feild")
@@ -28,24 +27,24 @@ const Register = () => {
     initialValues:init,
     validationSchema:formSchema,
     onSubmit:(values)=>{
-      console.log(values)
       handleSubmitt(values)
     }
   })
-
+useEffect(()=>{
+console.log(gen)
+},[gen])
 
    const dispatch=useDispatch();
    const history=useHistory();
   const getOtp=({name,email,password,cpassword,phone})=>{
-     console.log("h")
     const formData={
       name:name,
       email:email,
       password:password,
       phone:phone,
+      gender:gen?"male":"female",
     }
 if(password===cpassword){
-        console.log(formData)
         dispatch(register({formData,toast}))
 }
 else{
@@ -71,14 +70,16 @@ const handleSubmitt = ({email,otp})=>{
         <input type="text" name="name" placeholder='Your Name'  value={values.name} onChange={handleChange} onBlur={handleBlur} id="name" />
           <p className='err' >{errors.name&&touched.name?errors.name:null}</p>
           </div>
+            <div className="gen-op">
+                <input type="checkbox" value="Male" name="male" onClick={()=>setGen(true)}/><span className='vll'>Male</span>
+                <input type="checkbox" value="Female" name="female" onClick={()=>setGen(false)} /><span className='vll'>Female</span>
+                <input type="checkbox" value="Other" name="other" id="" /><span className='vll'>Other</span>
+            </div>
           <div>
         <input type="email" name="email"   placeholder='info@example.com'  value={values.email} onChange={handleChange} onBlur={handleBlur} id="email" />
         <p className='err' >{errors.email&&touched.email?errors.email:null}</p>
           </div>
-          <div>
-        <input type="number" name="phone"   placeholder='9999999999'  value={values.phone} onChange={handleChange} onBlur={handleBlur} id="phone" />
-        <p className='err' >{errors.phone&&touched.phone?errors.phone:null}</p>
-          </div>
+          
           <div>
         <input type="password" name="password"  placeholder='Password'  id="password" value={values.password} onChange={handleChange} onBlur={handleBlur} />
         <p className='err' >{errors.password&&touched.password?errors.password:null}</p>

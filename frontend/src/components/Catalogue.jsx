@@ -17,7 +17,6 @@ useEffect(()=>{
        // eslint-disable-next-line
   },[loading,tour])
   useEffect(()=>{
-     console.log(data)
      // eslint-disable-next-line
   },[data])
   

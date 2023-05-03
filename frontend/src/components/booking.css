@@ -117,11 +117,11 @@ textarea::placeholder{
 .book-btn{
     background-color:rgba(132, 119, 255, 0.823) ;
     color:rgb(255, 253, 253);
-    padding: 14px 40px;
+    padding: 10px 30px;
     font-size: large;
     border-radius: 10px;
-    margin-top:10px;
     cursor: pointer;
+    border: none;
 }
 .book-btn:hover{
     background-color:whitesmoke;
