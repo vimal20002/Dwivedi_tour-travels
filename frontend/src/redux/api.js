@@ -36,4 +36,9 @@ export const regOtp=(formData)=>{
 export const payConti=async(formData)=>{
     return await API.post('/checkout',formData)
 }
+export const changeInfo=async(formData)=>{
+    const data= await API.post('/updateinfo',formData)
+    
+    
+}
 

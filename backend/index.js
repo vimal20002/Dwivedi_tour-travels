@@ -2,14 +2,17 @@ import express from "express"
 import mongoose from "mongoose"
 import cors from "cors"
 import  userRoute from "./routes/userRoutes.js";
+import dotenv from "dotenv"
+
  
 const app = express();
+dotenv.config()
 app.use(cors());
 app.use(express.json({limit:"30mb" ,extended:true}))
 app.use(express.urlencoded({limit:"30mb" ,extended:true}))
 
 
-const uri = "mongodb+srv://skk180509:TPKebxLOul6qmZIU@cluster0.fvuyhpj.mongodb.net/?retryWrites=true&w=majority"
+const uri = process.env.DB_URI;
 // mongoose.connect(uri).then(()=>{
 //     console.log("Connected")
 // }).catch((err)=>{
@@ -30,7 +33,7 @@ app.get('/', (req,res)=>{
     res.send("Hello World")
 })
 app.use( userRoute)
-const port = 8000;
+const port = process.env.PORT;
 app.listen(port,()=>{
     console.log(`server is running at port ${port}`)
 })

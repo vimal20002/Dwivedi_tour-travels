@@ -27,6 +27,7 @@ export const register = async (req, res) => {
               OTP += digits[Math.floor(Math.random() * 10)];
             }
             const nuser = new UserModal({ ...req.body, password: hpass,otp:OTP });
+            nuser.valid=false;
             console.log(nuser)
             await nuser.save();
 
@@ -36,13 +37,13 @@ export const register = async (req, res) => {
           service:'outlook',
           pool:true,
           auth: {
-            user: 'dwiveditourtravels@outlook.com',
-            pass: 'Vimalraghav$'
+            user: process.env.SMTP_USER,
+            pass: process.env.EMAIL_PASS
           }
       });
       
       var mailOptions = {
-        from: 'dwiveditourtravels@outlook.com',
+        from: process.env.SMTP_USER,
         to: req.body.email,
         subject: 'OTP For Your Email confirmation',
         text: `Dear Customer,\n
@@ -57,7 +58,7 @@ export const register = async (req, res) => {
           console.log('Email sent');
         }
       })
-            res.json({message:"Otp sent Successfully"});
+            res.json({message:"Otp sent Successfully check mail(Check spam section also)!"});
         }
 
     } catch (error) {
@@ -65,6 +66,16 @@ export const register = async (req, res) => {
     }
 
 }
+setTimeout(async()=>{
+  const users = await UserModal.find({});
+  users?.map(async(e)=>{
+    if(e?.valid===false)
+    {
+      await UserModal.deleteOne({email:e.email});
+    }
+  })
+
+},5*60*1000)
 export const confirmOtpSignup=async(req,res)=>{
   console.log(req.body)
 try {
@@ -146,6 +157,8 @@ export const bookCab=async(req,res)=>{
             date:req.body.date,
             time:req.body.time,
             price:req.body.price,
+            phone:req.body.phone,
+            type:"Cab"
          }
    
         const bk=new Bookingmodal(nbooking)
@@ -158,81 +171,156 @@ export const bookCab=async(req,res)=>{
 
 
 
-         const transporter = nodemailer.createTransport({
+         const transporter1 = nodemailer.createTransport({
           service:'outlook',
           pool:true,
+          maxConnections:20,
           auth: {
-            user: 'dwiveditourtravels@outlook.com',
-            pass: 'Vimalraghav$'
+            user: process.env.SMTP_USER,
+            pass: process.env.EMAIL_PASS,
           }
       });
       
       var mailOptions = {
-        from: 'dwiveditourtravels@outlook.com',
+        from: process.env.SMTP_USER,
         to: req.body.email,
         subject: 'OTP For Your Ride',
         text: `Dear Customer,   
    Your Cab Has Been Booked Succefully.Please Share The Given OTP  ${OTP}  With Our Driver To Start Your Ride. Happey Journey ! 
+   for any issue contact to 8318891285
 
         Regards,
         Shubham Dwivedi (Founder & CEO DT&Travels)`
       };
-      transporter.sendMail(mailOptions, function(error, info){
+       transporter1.sendMail(mailOptions, function(error, info){
         if (error) {
           console.log(error);
         } else {
           console.log('Email sent');
         }
       })
-      
-    
-    var mailOptionss = {
-      from: 'dwiveditourtravels@outlook.com',
-      to: 'skk180509@gmail.com',
-      subject: 'New Booking',
-      text: `Dear Owner,
-      There has been a booking from  ${username} for a ride. His confirmation OTP is ${OTP}.
-      You can contact him at 989983339 for further details`
-    };
-    transporter.sendMail(mailOptionss, function(error, info){
-      if (error) {
-        console.log(error);
-      } else {
-        console.log('Email sent');
-      }
-    })
-
-         res.json({message:"Cab booked successfully! Check Mail!",bk:bk});
+      const transporter2 = nodemailer.createTransport({
+        service:'outlook',
+        pool:true,
+        maxConnections:20,
+        auth: {
+          user: process.env.SMTP_USER,
+          pass: process.env.EMAIL_PASS,
+        }
+    });
+    setTimeout(()=>{
+      var mailOptionss = {
+        from: process.env.SMTP_USER,
+        to: process.env.OWNER_EMAIL,
+        subject: 'New Booking',
+        text: `Dear Owner,
+        There has been a booking from  ${username} for a ride. His confirmation OTP is ${OTP}.
+        You can contact him at ${req.body.phone} for further details`
+      };
+      transporter2.sendMail(mailOptionss, function(error, info){
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent');
+        }
+      })
+  
+    },60*1000)
+  
+         res.json({message:"Cab booked successfully! Check Mail(Check spam section also)!",bk:bk});
        } catch (error) {
         res.send(error);
        }  
+      
 }
 export const bookCargo=async(req,res)=>{
-    try {
-      const user=await UserModal.findOne({email:req.body.email});
-      const nbooking={
-         vehicle:req.body.vehicle,
-         phone:req.body.phone,
-         pickLoc:req.body.pickLoc,
-         dest:req.body.dest,
-         date:req.body.date,
-         time:req.body.time,
-         feed:req.body.feed
+  try {
+    console.log(req.body);
+     const user=await UserModal.findOne({email:req.body.email});
+     const username=user.name;
+     const nbooking={
+      name:username,
+      email:req.body.email,
+        pickLoc:req.body.pickLoc,
+        dest:req.body.dest,
+        date:req.body.date,
+        time:req.body.time,
+        price:req.body.price,
+        phone:req.body.phone,
+        type:"Cargo"
+     }
+
+    const bk=new Bookingmodal(nbooking)
+    await bk.save()
+     var digits = '0123456789';
+     let OTP = '';
+     for (let i = 0; i < 4; i++ ) {
+         OTP += digits[Math.floor(Math.random() * 10)];
+     }
+
+
+
+     const transporter1 = nodemailer.createTransport({
+      service:'outlook',
+      pool:true,
+      maxConnections:20,
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.EMAIL_PASS,
       }
-      console.log(nbooking);
-      const arr = user.bookings;
-      arr.push(nbooking)
-      user.bookings = arr;
-      console.log(user);
-      await user.save();
-      console.log(user);
-      const admininfo= new adminModal({bookings:req.body});
-      await admininfo.save();
-      console.log(admininfo)
-      res.json({message:"Cargo booked successfully!"});
-    } catch (error) {
-     res.send(error);
+  });
+  
+  var mailOptions = {
+    from: process.env.SMTP_USER,
+    to: req.body.email,
+    subject: 'OTP For Your Ride',
+    text: `Dear Customer,   
+           Your Cargo Has Been Booked Succefully.Please Share The Given OTP  ${OTP}  With Our Driver To Start Your Ride. Happey Journey ! 
+           for any issue contact to 8318891285
+    Regards,
+    Shubham Dwivedi (Founder & CEO DT&Travels)`
+  };
+   transporter1.sendMail(mailOptions, function(error, info){
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent');
     }
+  })
+  const transporter2 = nodemailer.createTransport({
+    service:'outlook',
+    pool:true,
+    maxConnections:20,
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.EMAIL_PASS,
+    }
+});
+setTimeout(()=>{
+  var mailOptionss = {
+    from: process.env.SMTP_USER,
+    to: process.env.OWNER_EMAIL,
+    subject: 'New Booking',
+    text: `Dear Owner,
+    There has been a booking from  ${username} for a ride. His confirmation OTP is ${OTP}.
+    You can contact him at ${req.body.phone} for further details`
+  };
+  transporter2.sendMail(mailOptionss, function(error, info){
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent');
+    }
+  })
+
+},60*1000)
+
+     res.json({message:"Cargo booked successfully! Check Mail(Check spam section also)!",bk:bk});
+   } catch (error) {
+    res.send(error);
+   }  
+  
+ 
 }
 export const querry = async(req, res)=>{
 const nquerry = new querryModal({querry:req.body});
@@ -282,13 +370,13 @@ export const upldateInfo=async(req,res)=>{
       const transporter = nodemailer.createTransport({
         service:'outlook',
         auth: {
-          user: 'dwiveditourtravels@outlook.com',
-          pass: 'Vimalraghav$'
+          user: process.env.SMTP_USER,
+          pass: process.env.EMAIL_PASS,
         }
     });
     
     var mailOptions = {
-      from: 'dwiveditourtravels@outlook.com',
+      from: process.env.SMTP_USER,
       to: req.body.email,
       subject: 'Verification for OTP of Dwivedi Tour&Travels',
       text: 'Your Otp for verification is '+OTP
@@ -299,7 +387,7 @@ export const upldateInfo=async(req,res)=>{
       } else {
         console.log('Email sent');
       }
-      res.json({message:"Otp sent successfully"})
+      res.json({message:"Otp sent successfully check mail (Check spam section also)!"})
     });
    }
    } catch (error) {
@@ -342,8 +430,7 @@ export const upldateInfo=async(req,res)=>{
   } 
  }
  export const addTour=async(req,res)=>{
-  const admin = await UserModal.findOne({email:"shubham@admin.com"})
-  if(admin.token===req.body.token){
+  
       const tour=await tourModal.findOne({title:req.body.title});
       if(tour===null){
           const ntour=new tourModal({...req.body});
@@ -355,11 +442,9 @@ export const upldateInfo=async(req,res)=>{
         res.json({message:"Tour already exists"})
        }
     }
-    else{
-      res.json({message:"You are not an admin"})
-    }
     
- }
+    
+ 
 
  export const getTour = async(req, res)=>{
   try {
@@ -372,41 +457,28 @@ export const upldateInfo=async(req,res)=>{
  }
  
  export const getBookings = async(req,res)=>{
-  const admin = await UserModal.findOne({email:"shubham@admin.com"})
-    if(admin?.token===req.body.token){
+  
       const bookings = await Bookingmodal.find( {});
       console.log(bookings)
       res.json(bookings)
-    }
-    else{
-      res.json({message:"You are not an admin"})
-    }
+    
 }
 
 export const delBooking = async(req, res)=>{
-  const admin = await UserModal.findOne({email:"shubham@admin.com"})
-    if(admin?.token===req.body.token){
+
       await Bookingmodal.deleteOne({_id:req.body._id})
       const data = await Bookingmodal.find({});
       res.json(data)
-    }
-    else{
-      res.json({message:"You are not an admin"})
-    }
+   
   
  }
 export const deltour=async(req,res)=>{
   try {
-    const admin = await UserModal.findOne({email:"shubham@admin.com"})
-    if(admin.token===req.body.token){
-      console.log("hey")
+   
       await tourModal.deleteOne({_id:req.body._id})
   const data = await tourModal.find({});
   res.json(data);
-    }
-    else{
-      res.json({message:"You are not an admin"})
-    }
+   
   } catch (error) {
     console.log(error)
   }
@@ -415,15 +487,11 @@ export const deltour=async(req,res)=>{
 export const delreview=async(req,res)=>{
   console.log(req.body)
   try {
-    const admin = await UserModal.findOne({email:"shubham@admin.com"})
-    if(admin.token===req.body.token){
+  
       await querryModal.deleteOne({_id:req.body._id})
   const data = await querryModal.find({});
   res.json(data);
-    }
-    else{
-      res.json({message:"You are not an admin"})
-    }
+    
   } catch (error) {
     console.log(error)
   }
@@ -431,15 +499,10 @@ export const delreview=async(req,res)=>{
 }
 export const updateTour = async(req,res)=>{
   try {
-    const admin = await UserModal.findOne({email:"shubham@admin.com"})
-    if(admin?.token===req.body.token){
     await tourModal.updateOne({_id:req.body._id},{...req.body})
     const data = await tourModal.find({});
     res.json(data);
-    }
-    else{
-      res.json({message:"You are not an admin"})
-    }
+    
   } catch (error) {
     console.log(error)
   }
@@ -450,8 +513,8 @@ try {
   const admin = await UserModal.findOne({email:req.body.email})
   const token = uuidv4();
   const date = new Date()
-  console.log(date.getMonth())
-  const pass = date.getUTCDate().toString()+(date.getMonth()+1).toString()+date.getFullYear().toString();
+  console.log(date.toLocaleDateString())
+  const pass =date.toLocaleDateString();
   if(pass===req.body.password){
   admin.token=token;
   await admin.save();
@@ -467,27 +530,21 @@ try {
 }
 export const getQuerry = async(req,res)=>{
   try {
-    const admin = await UserModal.findOne({email:"shubham@admin.com"})
-    if(admin?.token===req.body.token){
+   
     const data = await querryModal.find({})
     res.json(data);
-    }
-    else{
-      res.json({message:"You are not an admin"})
-    }
   } catch (error) {
     console.log(error)
   }
 }
-const secret = "Nub46Ml99qlMjqR5lgyWuMRu"
-const key = "rzp_test_hnhwpr4PlYB0mw"
+
 export const payFun =async(req, res)=>{
   console.log(req.body)
     try {
         console.log(req.body.amount)
          const instance = new Razorpay({
-            key_id: key,
-            key_secret: secret,
+            key_id: "rzp_test_hnhwpr4PlYB0mw",
+            key_secret: "Nub46Ml99qlMjqR5lgyWuMRu",
           });
           const options = {
             amount: Number(req.body.amount*100), // amount in the smallest currency unit
@@ -512,7 +569,6 @@ export const paymentverification =async(req, res)=>{
   var expectedSignature = crypto.createHmac('sha256', secret)
                                   .update(body.toString())
                                   .digest('hex');
-  var response = {"signatureIsValid":"false"}
   if(expectedSignature === req.body.razorpay_signature){
    const py= new Payement(req.body)
    console.log(py)
@@ -520,6 +576,6 @@ export const paymentverification =async(req, res)=>{
    const bk=await Bookingmodal.findOne({pid:req.body.razorpay_order_id});
    bk.paid = true;
    await bk.save();
-      res.redirect("https://dwiveditourstravels.netlify.app/");
+      res.redirect("https://dwiveditourstravels.com");
   }
 }

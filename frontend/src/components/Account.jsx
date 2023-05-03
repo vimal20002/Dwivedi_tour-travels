@@ -9,6 +9,7 @@ const Account = () => {
     const accountInfo=JSON.parse(localStorage.getItem("user"));
     const dispatch = useDispatch()
     const [data,setDt]=useState(null);
+    const [name,setName]=useState("")
     const history = useHistory()
     const {booking,loading}=useSelector((state)=>({...state.user}))
     const getBooking=()=>{
@@ -19,7 +20,7 @@ const Account = () => {
 
     },[booking])
     useEffect(()=>{
-
+      
     },[data])
     const {status}=useSelector((state)=>({...state.user}));
     useEffect(()=>{
@@ -27,8 +28,9 @@ const Account = () => {
       {
         history.push('/login')
       }
+      setName(accountInfo?.name)
     })
-    
+   
   return (
     <>
      <div className="main-account">
